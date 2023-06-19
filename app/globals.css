@@ -1,27 +1,106 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  font-family: Inter;
+}
+
+.flexCenter {
+  @apply flex justify-center items-center;
+}
+
+.flexBetween {
+  @apply flex justify-between items-center;
+}
+
+.flexStart {
+  @apply flex items-center justify-start;
+}
+
+.text-small {
+  @apply text-[14px] leading-[17px] font-medium;
+}
+
+.paddings {
+  @apply lg:px-[80px] py-6 px-[18px];
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 12px;
+}
+
+.modal-head-text {
+  @apply md:text-5xl text-3xl font-extrabold text-left max-w-5xl w-full;
+}
+
+.no-id-text {
+  @apply w-full text-sm text-gray-100 text-center my-10 px-2;
+}
+
+.no-result-text {
+  @apply w-full text-center my-10 px-2;
+}
+
+/* project details */
+.user-actions_section {
+  @apply fixed max-md:hidden flex gap-4 flex-col right-10 top-20;
+}
+
+.user-info {
+  @apply flex flex-wrap whitespace-nowrap text-sm font-normal gap-2 w-full;
+}
+
+/* Home */
+.projects-grid {
+  @apply grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10 mt-10 w-full;
+}
+
+/* project actions component */
+.edit-action_btn {
+  @apply p-4 text-gray-100 bg-light-white-400 rounded-md text-sm font-medium w-full;
+}
+
+.delete-action_btn {
+  @apply p-4 text-gray-100 rounded-md text-sm font-medium w-full;
+}
+
+/* project like component */
+.save_btn {
+  @apply gap-2 p-4 text-gray-100 bg-light-white-400 rounded-xl text-sm font-medium w-fit;
+}
+
+.like_btn {
+  @apply gap-2 p-4 rounded-xl text-sm font-medium w-fit;
+}
+
+/* Related Project Card Component */
+.related_project-card {
+  @apply flex-col rounded-2xl min-w-[210px] min-h-[197px];
+}
+
+.related_project-card_title {
+  @apply justify-end items-end w-full h-1/3 bg-gradient-to-b from-transparent to-black/50 rounded-b-2xl gap-2 absolute bottom-0 right-0 font-semibold text-lg text-white p-4;
+}
+
+.related_projects-grid {
+  @apply grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 mt-5;
+}
+
+.form-container {
+  @apply flex-col w-full lg:pt-24 pt-12 gap-10 text-lg max-w-5xl mx-auto;
 }

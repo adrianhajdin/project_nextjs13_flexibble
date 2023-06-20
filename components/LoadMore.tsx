@@ -20,10 +20,7 @@ const LoadMore = ({ cursor }: Props) => {
 
     return (
         <div className="w-full flexCenter gap-5 mt-10">
-            <CustomButton
-                title="Next Page"
-                handleClick={handleNavigation}
-            />
+            <CustomButton title="Next Page" handleClick={handleNavigation} />
         </div>
     );
 };

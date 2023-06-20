@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 
 export const metadata = {
   title: "Flexibble",
-  description: "A dribble clone for developers",
+  description: "Showcase and discover remarkable developer projects",
 };
 
 export default function RootLayout({
@@ -15,7 +15,6 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body>
-        {/* @ts-ignore */}
         <Navbar />
         <main>
           {children}

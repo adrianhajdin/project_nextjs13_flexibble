@@ -8,34 +8,29 @@ import CustomButton from './Button';
 const AuthProviders = () => {
     const [providers, setProviders] = useState<any>(null);
 
-    const fetchProviders = async () => {
-        const res = await getProviders();
-        setProviders(res);
-    }
-
     useEffect(() => {
+        const fetchProviders = async () => {
+            const res = await getProviders();
+    
+            setProviders(res);
+        }
+
         fetchProviders();
     }, []);
 
     if (providers) {
         return (
             <div>
-                {
-                    Object.values(providers).map((provider: any, index) => (
-                        <CustomButton
-                            key={index}
-                            title='Sign in'
-                            handleClick={() => signIn(provider?.id)}
-                        />
-                    ))
-                }
+                {Object.values(providers).map((provider: any, index) => (
+                    <CustomButton 
+                        key={index} 
+                        title='Sign In' 
+                        handleClick={() => signIn(provider?.id)}
+                    />
+                ))}
             </div>
         )
     }
-
-    return (
-        <p>...</p>
-    )
 }
 
 export default AuthProviders

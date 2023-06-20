@@ -1,42 +1,47 @@
 export const NavLinks = [
   { href: '/', key: 'Inspiration', text: 'Inspiration' },
-  { href: '/', key: 'Find Work', text: 'Find Work' },
-  { href: '/', key: 'Learn Design', text: 'Learn Design' },
-  { href: '/', key: 'Go Pro', text: 'Go Pro' },
-  { href: '/', key: 'Hire Designers', text: 'Hire Designers' }
+  { href: '/', key: 'Find Projects', text: 'Find Projects' },
+  { href: '/', key: 'Learn Development', text: 'Learn Development' },
+  { href: '/', key: 'Career Advancement', text: 'Career Advancement' },
+  { href: '/', key: 'Hire Developers', text: 'Hire Developers' }
 ];
 
+
 export const categoryFilters = [
-  "discover",
-  "animation",
-  "branding",
-  "illustration",
-  "monile",
-  "print",
-  "product",
-  "typography",
-  "web",
-];
+  "Frontend",
+  "Backend",
+  "Full-Stack",
+  "Mobile",
+  "UI/UX",
+  "Game Dev",
+  "DevOps",
+  "Data Science",
+  "Machine Learning",
+  "Cybersecurity",
+  "Blockchain",
+  "E-commerce",
+  "Chatbots"
+]
 
 export const footerLinks = [
   {
-    title: 'For designers',
+    title: 'For developers',
     links: [
       'Go Pro!',
-      'Explore design work',
-      'Design blog',
-      'Overtime podcast',
-      'Playoffs',
+      'Explore development work',
+      'Development blog',
+      'Code podcast',
+      'Open-source projects',
       'Refer a Friend',
       'Code of conduct',
     ],
   },
   {
-    title: 'Hire designers',
+    title: 'Hire developers',
     links: [
       'Post a job opening',
       'Post a freelance project',
-      'Search for designers',
+      'Search for developers',
     ],
   },
   {
@@ -62,31 +67,32 @@ export const footerLinks = [
   {
     title: 'Directories',
     links: [
-      'Design jobs',
-      'Designers for hire',
-      'Freelance designers for hire',
+      'Development jobs',
+      'Developers for hire',
+      'Freelance developers for hire',
       'Tags',
       'Places',
     ],
   },
   {
-    title: 'Design assets',
+    title: 'Development assets',
     links: [
-      'Flexibble Marketplace',
-      'Creative Market',
-      'Fontspring',
-      'Font Squirrel',
+      'Code Marketplace',
+      'GitHub Marketplace',
+      'NPM Registry',
+      'Packagephobia',
     ],
   },
   {
-    title: 'Design Resources',
+    title: 'Development Resources',
     links: [
       'Freelancing',
-      'Design Hiring',
-      'Design Portfolio',
-      'Design Education',
+      'Development Hiring',
+      'Development Portfolio',
+      'Development Education',
       'Creative Process',
-      'Design Industry Trends',
+      'Development Industry Trends',
     ],
   },
 ];
+

@@ -5,7 +5,6 @@ import { getCurrentUser } from "@/lib/session"
 import { getProjectDetails } from "@/lib/actions"
 import Modal from "@/components/Modal"
 import ProjectActions from "@/components/details/ProjectActions"
-import ProjectLike from "@/components/details/ProjectLike"
 import RelatedProjects from "@/components/details/RelatedProjects"
 
 const Project = async ({ params: { id } }: { params: { id: string } }) => {
@@ -76,8 +75,6 @@ const Project = async ({ params: { id } }: { params: { id: string } }) => {
                         </div>
                     </div>
                 </div>
-
-                <ProjectLike />
             </section>
 
             <section className="mt-14">

@@ -12,20 +12,16 @@ type Props = {
 const RelatedProjects = async ({ userId, projectId }: Props) => {
     const result = await getUserProjects(userId)
 
-        // @ts-ignore
-
+    // @ts-ignore
     const filteredProjects = result?.user?.projects?.edges?.filter(({ node }: { node: UserNode }) => node?.id !== projectId)
 
-    if (filteredProjects?.length === 0) {
-        return null
-    }
+    if (filteredProjects?.length === 0) return null;
 
     return (
         <section className="flex flex-col mt-32 w-full">
             <div className="flexBetween">
                 <p className="text-base font-bold">
                 {/* @ts-ignore */}
-
                     More by {result?.user?.name}
                 </p>
                 <Link

@@ -21,25 +21,9 @@ const Button = ({ title, leftIcon, rightIcon, handleClick, submitting, type, bgC
         ${submitting ? 'bg-black/50' : bgColor ? bgColor : 'bg-primary-purple'} rounded-xl text-sm font-medium max-md:w-full`}
         onClick={handleClick}
     >
-        {leftIcon && (
-            <Image
-                src={leftIcon}
-                width={14}
-                height={14}
-                alt="left icon"
-            />
-        )}
-
+        {leftIcon && <Image src={leftIcon} width={14} height={14} alt="left icon" />}
         {title}
-
-        {rightIcon && (
-            <Image
-                src={rightIcon}
-                width={14}
-                height={14}
-                alt="right icon"
-            />
-        )}
+        {rightIcon && <Image src={rightIcon} width={14} height={14} alt="right icon" />}
     </button>
 )
 

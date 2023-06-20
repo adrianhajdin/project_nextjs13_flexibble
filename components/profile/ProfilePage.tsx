@@ -1,8 +1,9 @@
 import { UserNode } from '@/common.types'
 import Image from 'next/image'
 
-import ProfileButtons from './ProfileButtons'
 import ProfileProjects from './ProfileProjects'
+import Link from 'next/link'
+import Button from "../Button";
 
 type Props = {
     user: UserNode;
@@ -17,7 +18,10 @@ const ProfilePage = ({ user }: Props) => (
                 <p className="text-[35px] leading-[42px] font-bold mt-[40px]">{user?.name}</p>
                 <p className="md:text-[47px] text-[30px] md:leading-[61px] leading-[32px] font-extrabold md:mt-[40px] mt-5 lg:max-w-[444px]">I’m Software Engineer at JSM 👋</p>
                 <div className="flex mt-[30px] gap-5">
-                    <ProfileButtons user={user} />
+                <Button title="Follow" leftIcon="/plus-round.svg" bgColor="bg-light-white-400" textColor="text-black-100" />
+                    <Link href={`mailto:${user?.email}`}>
+                        <Button title="Hire Me" leftIcon="/email.svg" />
+                    </Link>
                 </div>
             </div>
 

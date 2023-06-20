@@ -12,16 +12,16 @@ type Props = {
 }
 
 const ProjectActions = ({ projectId }: Props) => {
-    const router = useRouter()
     const [isDeleting, setIsDeleting] = useState<boolean>(false)
+    const router = useRouter()
 
     const handleDeleteProject = async () => {
         setIsDeleting(true)
 
         try {
-            await deleteProject(projectId)
-            alert("Project successfully deleted")
-            router.push("/")
+            await deleteProject(projectId);
+
+            router.push("/");
         } catch (error) {
             console.error(error)
         } finally {
@@ -31,16 +31,8 @@ const ProjectActions = ({ projectId }: Props) => {
 
     return (
         <>
-            <Link
-                href={`/edit-project/${projectId}`}
-                className="flexCenter edit-action_btn"
-            >
-                <Image
-                    src="/pencile.svg"
-                    width={16}
-                    height={16}
-                    alt="edit"
-                />
+            <Link href={`/edit-project/${projectId}`} className="flexCenter edit-action_btn">
+                <Image src="/pencile.svg" width={16} height={16} alt="edit" />
             </Link>
 
             <button
@@ -49,12 +41,7 @@ const ProjectActions = ({ projectId }: Props) => {
                 className={`flexCenter delete-action_btn ${isDeleting ? "bg-gray" : "bg-primary-purple"}`}
                 onClick={handleDeleteProject}
             >
-                <Image
-                    src="/trash.svg"
-                    width={16}
-                    height={16}
-                    alt="delete"
-                />
+                <Image src="/trash.svg" width={16} height={16} alt="delete" />
             </button>
         </>
     )

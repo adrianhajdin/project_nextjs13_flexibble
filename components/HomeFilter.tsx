@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import SearchBar from "./Searchbar";
 import { categoryFilters } from "@/constant";
 import { updateSearchParams } from "@/lib/utils";
 
@@ -27,15 +26,12 @@ const HomeFilter = () => {
             key={filter}
             type="button"
             onClick={() => handleTags(filter)}
-            className={`${tag === filter ? "bg-light-white-300 font-medium" : "font-normal"
-              } px-4 py-3 rounded-lg capitalize whitespace-nowrap`}
+            className={`${tag === filter ? "bg-light-white-300 font-medium" : "font-normal"} px-4 py-3 rounded-lg capitalize whitespace-nowrap`}
           >
             {filter}
           </button>
         ))}
       </ul>
-
-      {/* <SearchBar /> */}
     </div>
   );
 };

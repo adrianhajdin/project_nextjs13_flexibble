@@ -11,28 +11,25 @@ export default function Modal({ children }: { children: ReactNode }) {
 
     const onDismiss = useCallback(() => {
         window.document.body.style.overflowY = "auto";
+        
         router.back();
     }, [router]);
 
-    const handleClick = useCallback(
-        (e: React.MouseEvent<HTMLDivElement>) => {
-            if (e.target === overlay.current) {
-                if (onDismiss) onDismiss();
-            }
-        },
-        [onDismiss, overlay]
-    );
+    const handleClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+        if ((e.target === overlay.current) && onDismiss) {
+            onDismiss();
+        }
+    }, [onDismiss, overlay]);
 
-    const onKeyDown = useCallback(
-        (e: KeyboardEvent) => {
-            if (e.key === "Escape") onDismiss();
-        },
-        [onDismiss]
-    );
+    const onKeyDown = useCallback((e: KeyboardEvent) => {
+        if (e.key === "Escape") onDismiss();
+    }, [onDismiss]);
 
     useEffect(() => {
         window.document.body.style.overflowY = "hidden";
+
         document.addEventListener("keydown", onKeyDown);
+
         return () => document.removeEventListener("keydown", onKeyDown);
     }, [onKeyDown]);
 

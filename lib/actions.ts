@@ -186,32 +186,6 @@ export const getUserProjects = async (id: string, last?: string, cursor?: string
     }
 }
 
-export const updateUser = async (userId: string, form: UserProps) => {
-    try {
-        // const result = await makeRequest(`api/users/${userId}`, {
-        //     method: "PUT",
-        //     body: {
-        //         form,
-        //     }
-        // })
-
-        const { apiUrl, apiKey } = await getApiConfig();
-
-        const client = new GraphQLClient(apiUrl, {
-            headers: {
-                'x-api-key': apiKey,
-            },
-        });
-
-        const mutation = updateUserMutation(form, userId);
-        const data = await client.request(mutation);
-
-        return data;
-    } catch (err) {
-        console.log("Error", err)
-    }
-}
-
 export const getUser = async (email: string) => {
     try {
         const { apiUrl, apiKey } = await getApiConfig();

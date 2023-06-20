@@ -61,19 +61,14 @@ const ProjectForm = ({ type, session, project }: Props) => {
     const handleFormSubmit = async (e: FormEvent) => {
         e.preventDefault()
         setSubmitting(true)
-        console.log('--------HERE 0 --------')
-
 
         try {
             if (type === "create") {
-                console.log('--------HERE--------')
-                const result = await createNewProject(form, session?.user?.id)
-                console.log("Project created successfully, ", result)
+                await createNewProject(form, session?.user?.id)
                 router.push("/")
             }
             
             if (type === "edit") {
-                console.log('--------HERE EDIT--------')
                 // @ts-ignore
                 await updateProject(form, project?.id)
                 router.push("/")
@@ -117,14 +112,14 @@ const ProjectForm = ({ type, session, project }: Props) => {
             <FormField
                 title="Title"
                 state={form.title}
-                placeholder="Flexibble - Dribble clone"
+                placeholder="Flexibble"
                 setState={(value) => handleStateChange('title', value)}
             />
 
             <FormField
                 title='Description'
                 state={form.description}
-                placeholder="A dribble clone web application made using..."
+                placeholder="Showcase and discover remarkable developer projects."
                 isTextArea
                 setState={(value) => handleStateChange('description', value)}
             />
@@ -133,7 +128,7 @@ const ProjectForm = ({ type, session, project }: Props) => {
                 type="url"
                 title="Website URL"
                 state={form.liveSiteUrl}
-                placeholder="https://flexibble.com"
+                placeholder="https://jsmastery.pro"
                 setState={(value) => handleStateChange('liveSiteUrl', value)}
             />
 

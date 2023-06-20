@@ -28,9 +28,6 @@ const Home = async ({ searchParams }: Props) => {
     'x-api-key': apiKey
   };
 
-  console.log({ category, cursor })
-  console.log( typeof category, typeof cursor )
-  
   const query = getProjectsQuery(category, cursor)
   
   const response = await fetch(apiUrl, {
@@ -40,16 +37,9 @@ const Home = async ({ searchParams }: Props) => {
     cache: 'no-store' 
   });
 
-  console.log({ response, query })
-  
   const { data } = await response.json();
   
-  console.log({ data })
-
-
   const projectsToDisplay = data?.projectSearch?.edges || [];
-
-  console.log({ numberOfProjects: projectsToDisplay.length, projectsToDisplay})
 
   if (projectsToDisplay.length === 0) {
     return (

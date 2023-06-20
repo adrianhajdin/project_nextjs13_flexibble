@@ -15,24 +15,61 @@ type Props = {
   searchParams: any
 }
 
+const query = `{
+  projectCollection(last: 10) {
+    edges {
+      node {
+        title
+        description
+        id
+        image
+        category
+        liveSiteUrl
+        githubUrl
+        createdBy {
+          name
+          email
+          id
+          avatarUrl
+        }
+      }
+    }
+  }
+}`
+
 const Home = async ({ searchParams }: Props) => {
   let category = searchParams.category || null;
   let cursor = searchParams.cursor || null
   
   const { apiUrl, apiKey } = await getApiConfig();
-  const isProduction = process.env.NODE_ENV === 'production';
-  const baseUrl = isProduction ? `${process.env.SERVER_URL || ''}` : `http://localhost:3000/`;
+  // const isProduction = process.env.NODE_ENV === 'production';
+  // const baseUrl = isProduction ? `${process.env.SERVER_URL || ''}` : `http://localhost:3000/`;
   // const response = await fetch(`${baseUrl}/api/posts?category=${category}&cursor=${cursor}`);
 
-  const response = await fetch(apiUrl, {
-    headers: { 'x-api-key': apiKey },
-    method: 'POST',
-    body: JSON.stringify({ query: getProjectsQueryNew({ category, cursor }) }),
-    next: { tags: [getProjectsQueryNew({ category, cursor })] }
-  })
+  const headers = {
+    'Content-Type': 'application/graphql',
+    'x-api-key': apiKey
+  };
+  
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify({query}),
+    });
+    const {data} = await response.json();
+  
 
-  const { data } = await response.json()
-  console.log({data})
+    // const { data } = await axios.post(apiUrl, query, { headers });
+
+    // console.log({data})
+  // const response = await fetch(apiUrl, {
+  //   headers: { 'x-api-key': apiKey },
+  //   method: 'POST',
+  //   body: JSON.stringify(query),
+  // })
+
+  // const { data } = await response
+  // console.log({data})
 
 
   // console.log({data})

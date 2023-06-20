@@ -18,6 +18,7 @@ const UserProfile = async ({ params, searchParams }: Props) => {
 
     // @ts-ignore
     const result = await getUserProjects(params.id, 20, cursor)
+    // @ts-ignore
     if (!result?.user) return (
         <p className="no-result-text">Failed to fetch user info</p>
     )

@@ -31,14 +31,16 @@ const Home = async ({ searchParams }: Props) => {
   console.log({ category, cursor })
   console.log( typeof category, typeof cursor )
   
+  const query = getProjectsQuery(category, cursor)
+  
   const response = await fetch(apiUrl, {
     method: 'POST',
     headers: headers,
-    body: JSON.stringify({ query: getProjectsQuery(category, cursor) }),
+    body: JSON.stringify({ query }),
     cache: 'no-store' 
   });
 
-  console.log({ response, query: getProjectsQuery(category, cursor) })
+  console.log({ response, query })
   
   const { data } = await response.json();
   

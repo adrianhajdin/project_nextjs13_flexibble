@@ -8,13 +8,6 @@ export async function POST(request: Request) {
     const { name, email, avatarUrl } = await request.json();
     const { apiUrl, apiKey } = await getApiConfig();
 
-    // if (!name || !email || !avatarUrl) {
-    //     return NextResponse.json(
-    //         { message: "Invalid project ID or body." },
-    //         { status: 400 }
-    //     );
-    // }
-
     try {
         const client = new GraphQLClient(apiUrl, {
             headers: {

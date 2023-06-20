@@ -7,7 +7,6 @@ export const NavLinks = [
 ];
 
 export const categoryFilters = [
-  "all",
   "discover",
   "animation",
   "branding",
@@ -17,14 +16,6 @@ export const categoryFilters = [
   "product design",
   "typography",
   "web design",
-];
-
-export const profileFilters = [
-  'work',
-  'projects',
-  'collections',
-  'liked shorts',
-  'about',
 ];
 
 export const footerLinks = [

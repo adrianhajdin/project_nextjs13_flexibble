@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { GraphQLClient } from "graphql-request";
 
 import { getApiConfig } from "@/lib/utils";
-import { getProjectsQuery } from "@/graphql/query";
+import { getProjectsQuery, getProjectsQueryNew } from "@/graphql/query";
 import { createProjectMutation } from '@/graphql/mutation';
 
 export async function POST(request: Request) {
@@ -42,7 +42,8 @@ export async function GET(request: Request) {
             },
         });
 
-        const mutation = getProjectsQuery(search, category, cursor);
+        // const mutation = getProjectsQuery(search, category, cursor);
+        const mutation = getProjectsQueryNew({ category, cursor });
         const data = await client.request(mutation);
 
         return NextResponse.json(data, { status: 200 });

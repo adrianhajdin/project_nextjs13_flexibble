@@ -2,6 +2,9 @@ import { AllProjectsType } from "@/common.types";
 import HomeFilter from "@/components/HomeFilter";
 import LoadMore from "@/components/LoadMore";
 import ProjectCard from "@/components/ProjectCard";
+import { getProjectsQueryNew } from "@/graphql/query";
+import { GraphQLClient } from "graphql-request";
+import { getApiConfig } from "@/lib/utils";
 
 type SearchParams = {
   category?: string | null;
@@ -15,16 +18,39 @@ type Props = {
 
 const Home = async ({ searchParams }: Props) => {
   let category = searchParams.category || null;
-  let search = searchParams.search || null;
   let cursor = searchParams.cursor || null
-
+  
+  const { apiUrl, apiKey } = await getApiConfig();
   const isProduction = process.env.NODE_ENV === 'production';
   const baseUrl = isProduction ? `${process.env.SERVER_URL || ''}` : `http://localhost:3000/`;
-  const response = await fetch(`${baseUrl}/api/posts?category=${category}&search=${search}&cursor=${cursor}`);
+  // const response = await fetch(`${baseUrl}/api/posts?category=${category}&cursor=${cursor}`);
 
-  const projects = await response.json();
 
-  if (projects?.projectSearch?.edges?.length === 0) {
+  const response = await fetch(apiUrl, {
+    headers: { 'x-api-key': apiKey },
+    method: 'POST',
+    body: JSON.stringify({ query: getProjectsQueryNew({ category, cursor }) }),
+  })
+
+  const { data } = await response.json()
+
+
+  console.log({data})
+
+  // const client = new GraphQLClient(apiUrl, {
+  //   headers: {
+  //       'x-api-key': apiKey,
+  //   },
+  // });
+
+  // const mutation = getProjectsQueryNew({ category, cursor });
+  // const data = await client.request(mutation);
+
+  // const projects = await response.json();
+
+  const projectsToDisplay = data?.projectCollection?.edges || [];
+
+  if (projectsToDisplay.length === 0) {
     return (
       <section className="flexStart flex-col paddings">
         <HomeFilter />
@@ -33,15 +59,11 @@ const Home = async ({ searchParams }: Props) => {
     )
   }
 
-  console.log({ serverUrl: process.env.SERVER_URL })
-  console.log({ projects: projects?.projectSearch?.edges })
-  console.log({ hasNextPage: projects?.projectSearch?.pageInfo?.hasNextPage })
-
   return (
     <section className="flexStart flex-col paddings mb-16">
       <HomeFilter />
       <section className="projects-grid">
-        {projects?.projectSearch?.edges.map(({ node }: AllProjectsType) => (
+        {projectsToDisplay.map(({ node }: AllProjectsType) => (
           <ProjectCard
             key={`${node?.id}`}
             id={node?.id}
@@ -53,9 +75,9 @@ const Home = async ({ searchParams }: Props) => {
           />
         ))}
       </section>
-      {projects?.projectSearch?.pageInfo?.hasNextPage && (
-        <LoadMore cursor={projects?.projectSearch?.pageInfo?.endCursor} />
-      )}
+      {/* {data?.projectSearch?.pageInfo?.hasNextPage && (
+        <LoadMore cursor={data?.projectSearch?.pageInfo?.endCursor} />
+      )} */}
     </section>
   )
 };

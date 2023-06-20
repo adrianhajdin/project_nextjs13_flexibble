@@ -6,14 +6,7 @@ import { getUserQuery } from "@/graphql/query";
 
 export async function POST(request: Request) {
     const { email } = await request.json()
-
-    // if (!email) {
-    //     return NextResponse.json(
-    //         { message: "Invalid email." },
-    //         { status: 400 }
-    //     );
-    // }
-
+    
     const { apiUrl, apiKey } = await getApiConfig();
 
     try {

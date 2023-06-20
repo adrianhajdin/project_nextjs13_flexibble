@@ -63,15 +63,28 @@ export const deleteProjectMutation = (projectId: string) => {
 
 export const createUserMutation = (name: string, email: string, avatarUrl: string) => {
 	return `mutation {
-        userCreate(input: { name: "${name}", email: "${email}", avatarUrl: "${avatarUrl}" }) {
+		userCreate(input: { name: "${name}", email: "${email}", avatarUrl: "${avatarUrl}" }) {
 			user {
-				id
 				name
 				email
 				avatarUrl
+				description
+				githubUrl
+				linkedinUrl
+				id
 			}
 		}
 	}`
+	// return `mutation {
+  //     userCreate(input: { name: "${name}", email: "${email}", avatarUrl: "${avatarUrl}" }) {
+	// 			user {
+	// 				id
+	// 				name
+	// 				email
+	// 				avatarUrl
+	// 			}
+	// 		}
+	// 	}`
 }
 
 export const updateUserMutation = (form: UserFormProps, userId: string) => {

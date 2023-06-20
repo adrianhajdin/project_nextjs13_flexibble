@@ -51,12 +51,13 @@ const Home = async ({ searchParams }: Props) => {
     'x-api-key': apiKey
   };
   
-    const response = await fetch(apiUrl, {
-      method: 'POST',
-      headers: headers,
-      body: JSON.stringify({query}),
-    });
-    const {data} = await response.json();
+  const response = await fetch(apiUrl, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify({ query }),
+  });
+  
+  const {data} = await response.json();
   
 
     // const { data } = await axios.post(apiUrl, query, { headers });

@@ -58,7 +58,10 @@ export const authOptions: NextAuthOptions = {
       try {
         // @ts-ignore
         const userExists = await getUser(user.email)
-
+        
+        
+        
+        // @ts-ignore
         if (!userExists.user) {
           // @ts-ignore
           await createUser(user.name, user.email, user.image)

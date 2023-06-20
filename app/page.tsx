@@ -19,7 +19,7 @@ const Home = async ({ searchParams }: Props) => {
   let category = searchParams.category || null;
   let cursor = searchParams.cursor || null
   
-  const { apiUrl, apiKey } = await getApiConfig();
+  // const { apiUrl, apiKey } = await getApiConfig();
   const isProduction = process.env.NODE_ENV === 'production';
   const baseUrl = isProduction ? `${process.env.SERVER_URL || ''}` : `http://localhost:3000/`;
   const response = await fetch(`${baseUrl}/api/posts?category=${category}&cursor=${cursor}`);
@@ -48,6 +48,8 @@ const Home = async ({ searchParams }: Props) => {
   const data = await response.json();
 
   const projectsToDisplay = data?.projectCollection?.edges || [];
+
+  console.log({projectsToDisplay})
 
   if (projectsToDisplay.length === 0) {
     return (

@@ -17,28 +17,6 @@ type Props = {
   searchParams: SearchParams
 }
 
-// const query = `{
-//   projectCollection(last: 10) {
-//     edges {
-//       node {
-//         title
-//         description
-//         id
-//         image
-//         category
-//         liveSiteUrl
-//         githubUrl
-//         createdBy {
-//           name
-//           email
-//           id
-//           avatarUrl
-//         }
-//       }
-//     }
-//   }
-// }`
-
 const Home = async ({ searchParams }: Props) => {
   let category = searchParams.category || null;
   let cursor = searchParams.cursor || null
@@ -51,6 +29,7 @@ const Home = async ({ searchParams }: Props) => {
   };
 
   console.log({ category, cursor })
+  console.log( typeof category, typeof cursor )
   
   const response = await fetch(apiUrl, {
     method: 'POST',

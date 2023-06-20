@@ -24,12 +24,6 @@ const Home = async ({ searchParams }: Props) => {
   const baseUrl = isProduction ? `${process.env.SERVER_URL || ''}` : `http://localhost:3000/`;
   // const response = await fetch(`${baseUrl}/api/posts?category=${category}&cursor=${cursor}`);
 
-  console.log({
-    apiUrl,
-    apiKey,
-    query: getProjectsQueryNew({ category, cursor })
-  });
-
   const response = await fetch(apiUrl, {
     headers: { 'x-api-key': apiKey },
     method: 'POST',
@@ -38,6 +32,7 @@ const Home = async ({ searchParams }: Props) => {
   })
 
   const { data } = await response.json()
+  console.log({data})
 
 
   // console.log({data})

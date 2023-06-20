@@ -59,19 +59,17 @@ export const getProjectsQueryNew = ({ category, cursor }: { category: string | n
 
   // query += ')';
   
-  return `query ProjectCollection {
-    projectCollection(last: 6) {
-      edges { 
+  return `{
+    projectCollection(last: 10) {
+      edges {
         node {
           title
           description
-          image
-          githubUrl
-          liveSiteUrl
           id
-          updatedAt
-          createdAt
+          image
           category
+          liveSiteUrl
+          githubUrl
           createdBy {
             name
             email
@@ -79,12 +77,6 @@ export const getProjectsQueryNew = ({ category, cursor }: { category: string | n
             avatarUrl
           }
         }
-      }
-      pageInfo {
-        hasPreviousPage
-        hasNextPage
-        startCursor
-        endCursor
       }
     }
   }`

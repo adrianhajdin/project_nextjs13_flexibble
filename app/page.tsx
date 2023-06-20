@@ -1,9 +1,9 @@
 import { AllProjectsType } from "@/common.types";
 import HomeFilter from "@/components/HomeFilter";
-import LoadMore from "@/components/LoadMore";
+// import LoadMore from "@/components/LoadMore";
 import ProjectCard from "@/components/ProjectCard";
 import { getProjectsQueryNew } from "@/graphql/query";
-import { GraphQLClient } from "graphql-request";
+// import { GraphQLClient } from "graphql-request";
 import { getApiConfig } from "@/lib/utils";
 
 type SearchParams = {
@@ -12,7 +12,7 @@ type SearchParams = {
 }
 
 type Props = {
-  searchParams: SearchParams
+  searchParams: any
 }
 
 const Home = async ({ searchParams }: Props) => {

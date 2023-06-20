@@ -8,11 +8,11 @@ const User = g.model('User', {
   description: g.string().length({ min: 2, max: 1000 }).optional(), // Optional string field for the description with length constraints
   githubUrl: g.url().optional(), // Optional URL field for the GitHub URL
   linkedinUrl: g.url().optional(), // Optional URL field for the LinkedIn URL
-  posts: g.relation(() => Post).list(),
+  projects: g.relation(() => Project).list(),
 });
 
 // Define the Project model
-const Post = g.model('Post', {
+const Project = g.model('Project', {
   id: g.id().unique(), // Unique ID field for the project
   title: g.string().length({ min: 3 }), // Required string field for the title with a minimum length of 3 characters
   description: g.string().length({ min: 10 }), // Required string field for the description with a minimum length of 10 characters

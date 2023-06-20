@@ -62,6 +62,7 @@ const ProjectForm = ({ type, session, project }: Props) => {
         e.preventDefault()
         setSubmitting(true)
 
+        console.log({sessionId: session?.user?.id})
         try {
             if (type === "create") {
                 await createNewProject(form, session?.user?.id)

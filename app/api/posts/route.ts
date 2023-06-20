@@ -20,10 +20,10 @@ export async function POST(request: Request) {
         const data = await client.request(mutation);
 
         return NextResponse.json(data, { status: 200 });
-    } catch (error) {
+    } catch (error: any) {
         console.log(error);
 
-        return NextResponse.json({ message: "Failed to create a post" }, { status: 500 });
+        return NextResponse.json({ message: error.message }, { status: 500 });
     }
 }
 

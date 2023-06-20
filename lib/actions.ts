@@ -6,6 +6,7 @@ import { getApiConfig, isBase64DataURL } from "./utils";
 import { GraphQLClient } from "graphql-request";
 import { createProjectMutation, createUserMutation, deleteProjectMutation, updateProjectMutation, updateUserMutation } from "@/graphql/mutation";
 import { getProjectByIdQuery, getProjectsOfUserQuery, getUserQuery } from "@/graphql/query";
+import { g } from '@grafbase/sdk';
 
 type UserProps = {
     name: string

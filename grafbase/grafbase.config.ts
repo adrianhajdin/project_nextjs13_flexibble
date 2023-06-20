@@ -19,8 +19,13 @@ const Project = g.model('Project', {
   liveSiteUrl: g.url(), // URL field for the live site URL
   githubUrl: g.url(), // URL field for the GitHub URL
   likes: g.int().default(0), // Integer field for likes with a default value of 0
-  category: g.string(), // String field for the category
+  category: g.relation(() => Category), // String field for the category
   createdBy: g.relation(() => User), // Relation to the User model
+});
+
+const Category = g.model('Category', {
+  name: g.string().unique(), // Required string field for the category name, which should be unique
+  projects: g.relation(() => Project).list().optional(),
 });
 
 // make a cateogry a model -> set a slug
@@ -31,3 +36,6 @@ const Project = g.model('Project', {
 export default config({
   schema: g
 })
+
+
+

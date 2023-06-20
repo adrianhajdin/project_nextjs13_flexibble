@@ -56,8 +56,13 @@ const Home = async ({ searchParams }: Props) => {
     body: JSON.stringify({ query: getProjectsQuery(category, cursor) }),
     cache: 'no-store' 
   });
+
+  console.log({ response, query: getProjectsQuery(category, cursor) })
   
   const { data } = await response.json();
+  
+  console.log({ data })
+
 
   const projectsToDisplay = data?.projectSearch?.edges || [];
 

@@ -23,6 +23,11 @@ const Project = g.model('Project', {
   createdBy: g.relation(() => User), // Relation to the User model
 });
 
+// make a cateogry a model -> set a slug
+// set that field as a unique field
+//when creating a project, just make a call to grafbase to get all categories, map the ids, and then when creating a project
+// connect it to category -> using the connect feature by passing the id. when clicking at teh cateogry, just make a call to grafbase -> to fetch category by slug and then get all projects by category
+
 export default config({
   schema: g
 })

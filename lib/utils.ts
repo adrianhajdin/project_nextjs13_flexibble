@@ -20,10 +20,8 @@ export async function getApiConfig() {
     // const apiKey = process.env.GRAFBASE_API_KEY
     const isProduction = true
     // const isProduction = process.env.NODE_ENV === 'production';
-    const apiUrl = isProduction ? process.env.GRAFBASE_API_URL || '' : 'http://127.0.0.1:4000/graphql';
-    const apiKey = isProduction ? process.env.GRAFBASE_API_KEY || '' : 'letmein';
-
-    console.log('Connected to API: ', apiUrl);
+    const apiUrl = isProduction ? process.env.NEXT_PUBLIC_GRAFBASE_API_URL || '' : 'http://127.0.0.1:4000/graphql';
+    const apiKey = isProduction ? process.env.NEXT_PUBLIC_GRAFBASE_API_KEY || '' : 'letmein';
 
     return { apiUrl, apiKey };
 }

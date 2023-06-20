@@ -16,9 +16,13 @@ const Project = async ({ params: { id } }: { params: { id: string } }) => {
     )
 
     const result = await getProjectDetails(id)
+
+        // @ts-ignore
+
     if (!result?.project) return (
         <p className="w-full text-center my-10 px-2">Failed to fetch project info</p>
     )
+    // @ts-ignore
 
     const projectDetails = result?.project
 

@@ -5,6 +5,7 @@ type ProjectFormProps = {
 	liveSiteUrl: string,
 	githubUrl: string,
 	category: string,
+	creatorId?: string,
 }
 
 type UserFormProps = {
@@ -14,9 +15,18 @@ type UserFormProps = {
 	linkedinUrl: string
 }
 
-export const createProjectMutation = (form: ProjectFormProps, creatorId: string) => {
+export const createProjectMutation = (form: ProjectFormProps) => {
 	return `mutation {
-        projectCreate(input: { title: "${form.title}", description: "${form.description}", image: "${form.image}", liveSiteUrl: "${form.liveSiteUrl}", githubUrl: "${form.githubUrl}", category: "${form.category}", createdBy: { link: "${creatorId}" } 
+		projectCreate(input: {
+			title: "${form.title}"
+			description: "${form.description}"
+			image: "${form.image}"
+			liveSiteUrl: "${form.liveSiteUrl}"
+			githubUrl: "${form.githubUrl}"
+			category: "${form.category}"
+			createdBy: {
+				link: "${form.creatorId}"
+			}
 		}) {
 			project {
 				id

@@ -61,14 +61,19 @@ const ProjectForm = ({ type, session, project }: Props) => {
     const handleFormSubmit = async (e: FormEvent) => {
         e.preventDefault()
         setSubmitting(true)
+        console.log('--------HERE 0 --------')
+
 
         try {
             if (type === "create") {
-                await createNewProject(form, session?.user?.id)
+                console.log('--------HERE--------')
+                const result = await createNewProject(form, session?.user?.id)
+                console.log("Project created successfully, ", result)
                 router.push("/")
             }
-
+            
             if (type === "edit") {
+                console.log('--------HERE EDIT--------')
                 // @ts-ignore
                 await updateProject(form, project?.id)
                 router.push("/")

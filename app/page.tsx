@@ -59,7 +59,7 @@ const Home = async ({ searchParams }: Props) => {
   
   const { data } = await response.json();
 
-  const projectsToDisplay = data?.projectCollection?.edges || [];
+  const projectsToDisplay = data?.projectSearch?.edges || [];
 
   console.log({ numberOfProjects: projectsToDisplay.length, projectsToDisplay})
 

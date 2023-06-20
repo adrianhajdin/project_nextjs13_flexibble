@@ -24,7 +24,9 @@ const query = `{
         description
         id
         image
-        category
+        category {
+          name
+        }
         liveSiteUrl
         githubUrl
         createdBy {

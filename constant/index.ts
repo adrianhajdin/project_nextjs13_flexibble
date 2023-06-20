@@ -13,9 +13,9 @@ export const categoryFilters = [
   "illustration",
   "monile",
   "print",
-  "product design",
+  "product",
   "typography",
-  "web design",
+  "web",
 ];
 
 export const footerLinks = [

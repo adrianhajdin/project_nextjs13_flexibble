@@ -23,8 +23,10 @@ const Project = g.model('Project', {
   createdBy: g.relation(() => User), // Relation to the User model
 });
 
+const categories = g.enum('discover', ['discover', 'animation', 'branding', 'illustration', 'monile', 'print', 'product', 'typography', 'web'])
+
 const Category = g.model('Category', {
-  name: g.string().unique(), // Required string field for the category name, which should be unique
+  name: g.enumRef(categories), // Required string field for the category name, which should be unique
   projects: g.relation(() => Project).list().optional(),
 });
 

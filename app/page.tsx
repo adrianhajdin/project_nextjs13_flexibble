@@ -8,7 +8,6 @@ import { getApiConfig } from "@/lib/utils";
 
 type SearchParams = {
   category?: string | null;
-  search?: string | null;
   cursor?: string | null;
 }
 

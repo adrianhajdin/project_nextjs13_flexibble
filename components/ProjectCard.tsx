@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 type Props = {
     id: string;
@@ -12,15 +13,16 @@ type Props = {
     userId: string;
 };
 
-const generateRandomNumbers = () => {
-    const randomLikes = Math.floor(Math.random() * 1000);
-    const randomViews = (Math.floor(Math.random() * 10000) / 1000).toFixed(1) + 'k';
 
-    return { randomLikes, randomViews };
-  };
 
 const ProjectCard = ({ id, image, title, name, avatarUrl, userId }: Props) => {
-    const { randomLikes, randomViews } = generateRandomNumbers();
+    const [randomLikes, setRandomLikes] = useState(0);
+    const [randomViews, setRandomViews] = useState('');
+
+    useEffect(() => {
+        setRandomLikes(Math.floor(Math.random() * 10000))
+        setRandomViews(String((Math.floor(Math.random() * 10000) / 1000).toFixed(1) + 'k'))
+    }, []);
 
     return (
         <div className="flexCenter flex-col rounded-2xl drop-shadow-card">

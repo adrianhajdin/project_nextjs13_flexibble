@@ -9,6 +9,7 @@ export const makeRequest = async (url: string, options: RequestOptions) => {
     const isProduction = process.env.NODE_ENV === 'production';
     const fullUrl = isProduction ? `${process.env.NEXT_PUBLIC_SERVER_URL}/${url}` || '' : `http://localhost:3000/${url}`;
 
+    console.log({isProduction, fullUrl})
     try {
         const response = await fetch(fullUrl, {
             method,

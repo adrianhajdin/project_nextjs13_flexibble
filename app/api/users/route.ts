@@ -9,7 +9,7 @@ export async function POST(request: Request) {
     
     const { apiUrl, apiKey } = await getApiConfig();
 
-    try {
+    
         const client = new GraphQLClient(apiUrl, {
             headers: {
                 'x-api-key': apiKey,

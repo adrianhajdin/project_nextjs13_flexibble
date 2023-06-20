@@ -3,6 +3,9 @@ import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
 import { createUser, getUser } from "./actions";
+import { GraphQLClient } from "graphql-request";
+import { getApiConfig } from "./utils";
+import { getUserQuery } from "@/graphql/query";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -20,13 +23,28 @@ export const authOptions: NextAuthOptions = {
       const email = session?.user?.email as string;
 
       try {
-        const result = await getUser(email)
+        // const result = await getUser(email)
+
+            
+    const { apiUrl, apiKey } = await getApiConfig();
+
+    
+    const client = new GraphQLClient(apiUrl, {
+        headers: {
+            'x-api-key': apiKey,
+        },
+    });
+
+    const mutation = getUserQuery(email);
+    const data = await client.request(mutation);
+
 
         const newSession = {
           ...session,
           user: {
             ...session.user,
-            ...result?.user,
+             // @ts-ignore
+            ...data?.user,
           },
         };
 

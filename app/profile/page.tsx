@@ -24,6 +24,7 @@ const MyProfile = async ({ searchParams }: any) => {
   return (
     <>
       <ProfilePage
+        // @ts-ignore
         user={result?.user}
         // @ts-ignore
         searchParams={searchParams}

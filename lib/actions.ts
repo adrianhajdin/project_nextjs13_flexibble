@@ -4,8 +4,8 @@ import { FormState } from "@/common.types";
 import { makeRequest } from "./request";
 import { getApiConfig, isBase64DataURL } from "./utils";
 import { GraphQLClient } from "graphql-request";
-import { createProjectMutation, deleteProjectMutation, updateProjectMutation } from "@/graphql/mutation";
-import { getProjectByIdQuery } from "@/graphql/query";
+import { createProjectMutation, createUserMutation, deleteProjectMutation, updateProjectMutation, updateUserMutation } from "@/graphql/mutation";
+import { getProjectByIdQuery, getProjectsOfUserQuery, getUserQuery } from "@/graphql/query";
 
 type UserProps = {
     name: string
@@ -149,16 +149,18 @@ export const getProjectDetails = async (id: string) => {
 
 export const createUser = async (name: string, email: string, avatarUrl: string) => {
     try {
-        const result = await makeRequest(`api/users/new`, {
-            method: "POST",
-            body: {
-                name,
-                email,
-                avatarUrl
-            }
-        })
+        const { apiUrl, apiKey } = await getApiConfig();
 
-        return result
+        const client = new GraphQLClient(apiUrl, {
+            headers: {
+                'x-api-key': apiKey,
+            },
+        });
+
+        const mutation = createUserMutation(name, email, avatarUrl);
+        const data = await client.request(mutation);
+
+        return data
     } catch (err) {
         console.log("Error", err)
     }
@@ -166,15 +168,18 @@ export const createUser = async (name: string, email: string, avatarUrl: string)
 
 export const getUserProjects = async (id: string, last?: string, cursor?: string) => {
     try {
-        const result = await makeRequest(`api/users/projects/${id}`, {
-            method: "POST",
-            body: {
-                last,
-                cursor
-            }
-        })
+        const { apiUrl, apiKey } = await getApiConfig();
 
-        return result
+        const client = new GraphQLClient(apiUrl, {
+            headers: {
+                'x-api-key': apiKey,
+            },
+        });
+
+        const mutation = getProjectsOfUserQuery(id, last, cursor);
+        const data = await client.request(mutation);
+
+        return data
     } catch (error) {
         console.log("Error", error)
     }
@@ -182,14 +187,25 @@ export const getUserProjects = async (id: string, last?: string, cursor?: string
 
 export const updateUser = async (userId: string, form: UserProps) => {
     try {
-        const result = await makeRequest(`api/users/${userId}`, {
-            method: "PUT",
-            body: {
-                form,
-            }
-        })
+        // const result = await makeRequest(`api/users/${userId}`, {
+        //     method: "PUT",
+        //     body: {
+        //         form,
+        //     }
+        // })
 
-        return result
+        const { apiUrl, apiKey } = await getApiConfig();
+
+        const client = new GraphQLClient(apiUrl, {
+            headers: {
+                'x-api-key': apiKey,
+            },
+        });
+
+        const mutation = updateUserMutation(form, userId);
+        const data = await client.request(mutation);
+
+        return data;
     } catch (err) {
         console.log("Error", err)
     }
@@ -197,14 +213,18 @@ export const updateUser = async (userId: string, form: UserProps) => {
 
 export const getUser = async (email: string) => {
     try {
-        const result = await makeRequest(`api/users`, {
-            method: "POST",
-            body: {
-                email
-            }
-        })
+        const { apiUrl, apiKey } = await getApiConfig();
 
-        return result
+        const client = new GraphQLClient(apiUrl, {
+            headers: {
+                'x-api-key': apiKey,
+            },
+        });
+
+        const mutation = getUserQuery(email);
+        const data = await client.request(mutation);
+
+        return data;
     } catch (err) {
         console.log("Error", err)
     }

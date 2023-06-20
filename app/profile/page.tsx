@@ -5,9 +5,10 @@ import { getUserProjects } from "@/lib/actions";
 import ProfilePage from "@/components/profile/ProfilePage";
 
 type Props = {
-  searchParams: {
-    cursor?: "string"
-  };
+  searchParams: any
+  // searchParams: {
+  //   cursor?: "string"
+  // };
 };
 
 const MyProfile = async ({ searchParams }: Props) => {

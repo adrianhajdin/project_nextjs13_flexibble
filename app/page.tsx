@@ -49,6 +49,8 @@ const Home = async ({ searchParams }: Props) => {
     'Content-Type': 'application/graphql',
     'x-api-key': apiKey
   };
+
+  console.log({ category, cursor })
   
   const response = await fetch(apiUrl, {
     method: 'POST',

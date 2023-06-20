@@ -1,11 +1,11 @@
 export const getProjectsQuery = (category: string | null, cursor: string | null) => {
   let query = `projectSearch(first: 20`;
 
-  if (!cursor) {
+  if (cursor !== 'null') {
     query += `, after: "${cursor}"`
   }
 
-  if (!category) {
+  if (category !== 'null') {
     query += `, filter: { category: { eq: "${category}" } }`;
   }
 

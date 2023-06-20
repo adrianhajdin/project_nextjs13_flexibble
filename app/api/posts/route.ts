@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { GraphQLClient } from "graphql-request";
 
 import { getApiConfig } from "@/lib/utils";
-import { getProjectsQuery, getProjectsQueryNew } from "@/graphql/query";
+import { getProjectsQueryNew } from "@/graphql/query";
 import { createProjectMutation } from '@/graphql/mutation';
 
 export async function POST(request: Request) {

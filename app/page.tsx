@@ -12,7 +12,7 @@ type SearchParams = {
 }
 
 type Props = {
-  searchParams: SearchParams
+  searchParams: any
 }
 
 const Home = async ({ searchParams }: Props) => {
@@ -29,6 +29,7 @@ const Home = async ({ searchParams }: Props) => {
     headers: { 'x-api-key': apiKey },
     method: 'POST',
     body: JSON.stringify({ query: getProjectsQueryNew({ category, cursor }) }),
+    next: { tags: [getProjectsQueryNew({ category, cursor })] }
   })
 
   const { data } = await response.json()

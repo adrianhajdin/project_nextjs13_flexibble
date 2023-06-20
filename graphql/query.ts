@@ -1,50 +1,44 @@
-// export const getProjectsQuery = (search: string | null, category: string | null, cursor: string | null) => {
-  // let query = `projectSearch(first: 20`;
+export const getProjectsQuery = (category: string | null, cursor: string | null) => {
+  let query = `projectSearch(first: 20`;
 
-  // if (cursor !== "null") {
-  //   query += `, after: "${cursor}"`
-  // }
+  if (cursor !== "null") {
+    query += `, after: "${cursor}"`
+  }
 
-  // if (search !== "null") {
-  //   query += `, query: "${search}"`;
-  // }
+  if (category !== "null" && category?.toLowerCase() !== 'all') {
+    query += `, filter: { category: { eq: "${category}" } }`;
+  }
 
-  // if (category !== "null" && category?.toLowerCase() !== 'all') {
-  //   query += `, filter: { category: { eq: "${category}" } }`;
-  // }
+  query += ')';
 
-  // query += ')';
-
-  // console.log("grafbase query", query)
-
-  // return `{
-  //   ${query} {
-  //     pageInfo {
-  //       hasNextPage
-  //       hasPreviousPage
-  //       startCursor
-  //       endCursor
-  //     }
-  //     edges {
-  //       node {
-  //         title
-  //         githubUrl
-  //         description
-  //         liveSiteUrl
-  //         id
-  //         image
-  //         createdBy {
-  //           id
-  //           email
-  //           name
-  //           avatarUrl
-  //         }
-  //         category
-  //       }
-  //     }
-  //   }
-  // }`;
-// };
+  return `{
+    ${query} {
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
+      edges {
+        node {
+          title
+          githubUrl
+          description
+          liveSiteUrl
+          id
+          image
+          createdBy {
+            id
+            email
+            name
+            avatarUrl
+          }
+          category
+        }
+      }
+    }
+  }`;
+};
 
 export const getProjectsQueryNew = ({ category, cursor }: { category: string | null, cursor: string | null }) => {
   // let query = `projectCollection(last: 6`;

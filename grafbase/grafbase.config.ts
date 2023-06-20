@@ -19,16 +19,17 @@ const Project = g.model('Project', {
   liveSiteUrl: g.url(), // URL field for the live site URL
   githubUrl: g.url(), // URL field for the GitHub URL
   likes: g.int().default(0), // Integer field for likes with a default value of 0
-  category: g.relation(() => Category), // String field for the category
+  // category: g.relation(() => Category), // String field for the category
+  category: g.string().search(),
   createdBy: g.relation(() => User), // Relation to the User model
 });
 
-const categories = g.enum('discover', ['discover', 'animation', 'branding', 'illustration', 'monile', 'print', 'product', 'typography', 'web'])
+// const categories = g.enum('discover', ['discover', 'animation', 'branding', 'illustration', 'monile', 'print', 'product', 'typography', 'web'])
 
-const Category = g.model('Category', {
-  name: g.enumRef(categories), // Required string field for the category name, which should be unique
-  projects: g.relation(() => Project).list().optional(),
-});
+// const Category = g.model('Category', {
+//   name: g.enumRef(categories), // Required string field for the category name, which should be unique
+//   projects: g.relation(() => Project).list().optional(),
+// });
 
 // make a cateogry a model -> set a slug
 // set that field as a unique field
@@ -38,6 +39,3 @@ const Category = g.model('Category', {
 export default config({
   schema: g
 })
-
-
-

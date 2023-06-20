@@ -23,11 +23,7 @@ export const createProjectMutation = (form: ProjectFormProps) => {
 			image: "${form.image}"
 			liveSiteUrl: "${form.liveSiteUrl}"
 			githubUrl: "${form.githubUrl}"
-			category: {
-				create: { 
-					name: ${form.category}
-				}
-			}
+			category: "${form.category}"
 			createdBy: {
 				link: "${form.creatorId}"
 			}

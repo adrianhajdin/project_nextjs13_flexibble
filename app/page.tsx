@@ -2,7 +2,7 @@ import { AllProjectsType } from "@/common.types";
 import HomeFilter from "@/components/HomeFilter";
 // import LoadMore from "@/components/LoadMore";
 import ProjectCard from "@/components/ProjectCard";
-import { getProjectsQueryNew } from "@/graphql/query";
+import { getProjectsQuery  } from "@/graphql/query";
 // import { GraphQLClient } from "graphql-request";
 import { getApiConfig } from "@/lib/utils";
 
@@ -14,35 +14,34 @@ type SearchParams = {
 }
 
 type Props = {
-  searchParams: any
+  searchParams: SearchParams
 }
-const query = `{
-  projectCollection(last: 10) {
-    edges {
-      node {
-        title
-        description
-        id
-        image
-        category {
-          name
-        }
-        liveSiteUrl
-        githubUrl
-        createdBy {
-          name
-          email
-          id
-          avatarUrl
-        }
-      }
-    }
-  }
-}`
+
+// const query = `{
+//   projectCollection(last: 10) {
+//     edges {
+//       node {
+//         title
+//         description
+//         id
+//         image
+//         category
+//         liveSiteUrl
+//         githubUrl
+//         createdBy {
+//           name
+//           email
+//           id
+//           avatarUrl
+//         }
+//       }
+//     }
+//   }
+// }`
 
 const Home = async ({ searchParams }: Props) => {
-  // let category = searchParams.category || null;
-  // let cursor = searchParams.cursor || null
+  let category = searchParams.category || null;
+  let cursor = searchParams.cursor || null
   
   const { apiUrl, apiKey } = await getApiConfig();
 
@@ -54,7 +53,7 @@ const Home = async ({ searchParams }: Props) => {
   const response = await fetch(apiUrl, {
     method: 'POST',
     headers: headers,
-    body: JSON.stringify({ query }),
+    body: JSON.stringify({ query: getProjectsQuery(category, cursor) }),
     cache: 'no-store' 
   });
   

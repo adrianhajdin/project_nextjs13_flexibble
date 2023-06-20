@@ -12,7 +12,7 @@ type SearchParams = {
 }
 
 type Props = {
-  searchParams: any
+  searchParams: SearchParams
 }
 
 const Home = async ({ searchParams }: Props) => {

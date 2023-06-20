@@ -6,7 +6,6 @@ import ProfilePage from "@/components/profile/ProfilePage";
 
 type Props = {
   searchParams: {
-    tab?: "work" | "projects" | "about";
     cursor?: "string"
   };
 };

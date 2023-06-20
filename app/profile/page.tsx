@@ -11,7 +11,7 @@ type Props = {
   // };
 };
 
-const MyProfile = async ({ searchParams }: Props) => {
+const MyProfile = async ({ searchParams }: any) => {
   const session = await getCurrentUser();
   // @ts-ignore
   if (!session?.user?.id) redirect("/")

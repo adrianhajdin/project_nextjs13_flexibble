@@ -68,7 +68,8 @@ export const createNewProject = async (form: FormState, creatorId: string, token
             await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
-                    Authorization: `Bearer ${token}` 
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/graphql"
                 },
                 body: JSON.stringify({query: createProjectMutation(newForm)})
             })

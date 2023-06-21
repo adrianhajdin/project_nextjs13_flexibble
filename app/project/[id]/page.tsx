@@ -16,13 +16,12 @@ const Project = async ({ params: { id } }: { params: { id: string } }) => {
 
     const result = await getProjectDetails(id)
 
-        // @ts-ignore
-
+    // @ts-ignore
     if (!result?.project) return (
         <p className="w-full text-center my-10 px-2">Failed to fetch project info</p>
     )
-    // @ts-ignore
 
+    // @ts-ignore
     const projectDetails = result?.project
 
     // @ts-ignore
@@ -64,14 +63,12 @@ const Project = async ({ params: { id } }: { params: { id: string } }) => {
                         </p>
                         <div className="user-info">
                             <Link href={renderLink()}>
-                                {projectDetails?.createdBy?.name} <span className="text-gray">for</span> JSM
+                                {projectDetails?.createdBy?.name}
                             </Link>
                             <Image src="/dot.svg" width={4} height={4} alt="dot" />
-                            <button type="button">Follow</button>
-                            <Image src="/dot.svg" width={4} height={4} alt="dot" />
-                            <button type="button" className="text-primary-purple w-fit">
-                                Hire Us
-                            </button>
+                            <p className="text-primary-purple font-semibold">
+                                {projectDetails?.category}
+                            </p>
                         </div>
                     </div>
                 </div>

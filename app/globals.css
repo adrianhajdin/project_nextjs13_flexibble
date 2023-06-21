@@ -48,10 +48,6 @@ body {
   @apply md:text-5xl text-3xl font-extrabold text-left max-w-5xl w-full;
 }
 
-.no-id-text {
-  @apply w-full text-sm text-gray-100 text-center my-10 px-2;
-}
-
 .no-result-text {
   @apply w-full text-center my-10 px-2;
 }
@@ -79,15 +75,6 @@ body {
   @apply p-4 text-gray-100 rounded-md text-sm font-medium w-full;
 }
 
-/* project like component */
-.save_btn {
-  @apply gap-2 p-4 text-gray-100 bg-light-white-400 rounded-xl text-sm font-medium w-fit;
-}
-
-.like_btn {
-  @apply gap-2 p-4 rounded-xl text-sm font-medium w-fit;
-}
-
 /* Related Project Card Component */
 .related_project-card {
   @apply flex-col rounded-2xl min-w-[210px] min-h-[197px];
@@ -99,8 +86,4 @@ body {
 
 .related_projects-grid {
   @apply grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 mt-5;
-}
-
-.form-container {
-  @apply flex-col w-full lg:pt-24 pt-12 gap-10 text-lg max-w-5xl mx-auto;
 }

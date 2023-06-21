@@ -11,7 +11,7 @@ const EditProject = async ({ params: { id } }: { params: { id: string } }) => {
 
   const result = await getProjectDetails(id);
   
-      // @ts-ignore
+  // @ts-ignore
   if (!result?.project) return (
     <p className="no-result-text">Failed to fetch project info</p>
   )

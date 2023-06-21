@@ -57,7 +57,7 @@ const Home = async ({ searchParams }: Props) => {
     )
   }
 
-  console.log(data?.projectSearch?.pageInfo)
+  // console.log(data?.projectSearch?.pageInfo)
 
   return (
     <section className="flexStart flex-col paddings mb-16">

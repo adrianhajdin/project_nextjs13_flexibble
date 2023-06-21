@@ -1,8 +1,12 @@
-export const getProjectsQuery = (category: string | null, cursor: string | null) => {
-  let query = `projectSearch(first: 20`;
-
-  if (cursor) {
-    query += `, after: "${cursor}"`
+export const getProjectsQuery = (category: string | null, startCursor: string | null, endCursor: string | null) => {
+  let query = `projectSearch(`;
+  
+  if (startCursor) {
+    query += `last: 2, before: "${startCursor}"`;
+  } else if (endCursor) {
+    query += `first: 2, after: "${endCursor}"`;
+  } else {
+    query += `first: 2`;
   }
 
   if (category) {
@@ -39,6 +43,7 @@ export const getProjectsQuery = (category: string | null, cursor: string | null)
     }
   }`;
 };
+
 
 export const getProjectsQueryNew = ({ category, cursor }: { category: string | null, cursor: string | null }) => {
   // let query = `projectCollection(last: 6`;

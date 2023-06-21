@@ -11,7 +11,8 @@ export const dynamic = 'force-dynamic'
 
 type SearchParams = {
   category?: string | null;
-  cursor?: string | null;
+  endcursor?: string | null;
+  startcursor?: string | null
 }
 
 type Props = {
@@ -20,7 +21,8 @@ type Props = {
 
 const Home = async ({ searchParams }: Props) => {
   let category = searchParams.category || null;
-  let cursor = searchParams.cursor || null
+  let endCursor = searchParams.endcursor || null
+  let startCursor = searchParams.startcursor || null
   
   const { apiUrl, apiKey } = await getApiConfig();
 
@@ -29,7 +31,7 @@ const Home = async ({ searchParams }: Props) => {
     'x-api-key': apiKey
   };
 
-  const query = getProjectsQuery(category, cursor)
+  const query = getProjectsQuery(category, startCursor, endCursor)
   
   const response = await fetch(apiUrl, {
     method: 'POST',
@@ -39,8 +41,6 @@ const Home = async ({ searchParams }: Props) => {
   });
 
   const { data } = await response.json();
-
-  console.log({ data })
   
   const projectsToDisplay = data?.projectSearch?.edges || [];
 
@@ -52,6 +52,8 @@ const Home = async ({ searchParams }: Props) => {
       </section>
     )
   }
+
+  console.log(data?.projectSearch?.pageInfo)
 
   return (
     <section className="flexStart flex-col paddings mb-16">
@@ -69,9 +71,12 @@ const Home = async ({ searchParams }: Props) => {
           />
         ))}
       </section>
-      {data?.projectSearch?.pageInfo?.hasNextPage && (
-        <LoadMore cursor={data?.projectSearch?.pageInfo?.endCursor} />
-      )}
+        <LoadMore 
+          startCursor={data?.projectSearch?.pageInfo?.startCursor} 
+          endCursor={data?.projectSearch?.pageInfo?.endCursor} 
+          hasPreviousPage={data?.projectSearch?.pageInfo?.hasPreviousPage} 
+          hasNextPage={data?.projectSearch?.pageInfo.hasNextPage}
+        />
     </section>
   )
 };

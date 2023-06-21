@@ -3,24 +3,42 @@
 import { useRouter } from "next/navigation";
 
 import CustomButton from "./Button";
-import { updateSearchParams } from "@/lib/utils";
 
 type Props = {
-    cursor: string
+    startCursor: string
+    endCursor: string
+    hasPreviousPage: boolean
+    hasNextPage: boolean
 }
 
-const LoadMore = ({ cursor }: Props) => {
+const LoadMore = ({ startCursor, endCursor, hasPreviousPage, hasNextPage }: Props) => {
     const router = useRouter();
 
-    const handleNavigation = () => {
-        const newPathname = updateSearchParams("cursor", `${cursor}`);
-
+    const handleNavigation = (type: string) => {
+        const currentParams = new URLSearchParams(window.location.search);
+        
+        if (type === "prev" && hasPreviousPage) {
+            currentParams.delete("endcursor");
+            currentParams.set("startcursor", startCursor);
+        } else if (type === "next" && hasNextPage) {
+            currentParams.delete("startcursor");
+            currentParams.set("endcursor", endCursor);
+        }
+    
+        const newSearchParams = currentParams.toString();
+        const newPathname = `${window.location.pathname}?${newSearchParams}`;
+    
         router.push(newPathname);
-    };
+    };    
 
     return (
         <div className="w-full flexCenter gap-5 mt-10">
-            <CustomButton title="Next Page" handleClick={handleNavigation} />
+            {hasPreviousPage && (
+                <CustomButton title="Previous" handleClick={() => handleNavigation('prev')} />
+            )}
+            {hasNextPage && (
+                <CustomButton title="Next" handleClick={() => handleNavigation('next')} />
+            )}
         </div>
     );
 };

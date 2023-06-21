@@ -1,6 +1,6 @@
 import { ProjectNode } from "@/common.types"
 import ProjectCard from "../ProjectCard"
-import LoadMore from "../LoadMore";
+// import LoadMore from "../LoadMore";
 
 type Props = {
     user: {
@@ -35,10 +35,10 @@ const ProfileProjects = ({ user }: Props) => {
             </div>
 
             {/* @ts-ignore */}
-            {user?.projects?.pageInfo?.hasPreviousPage && (
+            {/* {user?.projects?.pageInfo?.hasPreviousPage && (
                 // @ts-ignore
                 <LoadMore cursor={user?.projects?.pageInfo?.startCursor} />
-            )}
+            )} */}
 
         </>
     )

@@ -1,12 +1,8 @@
 import { AllProjectsType } from "@/common.types";
 import HomeFilter from "@/components/HomeFilter";
 import LoadMore from "@/components/LoadMore";
-// import LoadMore from "@/components/LoadMore";
 import ProjectCard from "@/components/ProjectCard";
-import { getProjectsQuery  } from "@/graphql/query";
-import { fetchToken } from "@/lib/actions";
-// import { GraphQLClient } from "graphql-request";
-import { getApiConfig } from "@/lib/utils";
+import { fetchAllProjects } from "@/lib/actions";
 
 export const dynamic = 'force-dynamic'
 
@@ -25,27 +21,9 @@ const Home = async ({ searchParams }: Props) => {
   let endCursor = searchParams.endcursor || null
   let startCursor = searchParams.startcursor || null
 
-  const token = await fetchToken()
-  console.log("token?", token)
-  
-  const { apiUrl, apiKey } = await getApiConfig();
+  const  data  = await fetchAllProjects(category, startCursor, endCursor)
 
-  const headers = {
-    'Content-Type': 'application/graphql',
-    'x-api-key': apiKey
-  };
-
-  const query = getProjectsQuery(category, startCursor, endCursor)
-  
-  const response = await fetch(apiUrl, {
-    method: 'POST',
-    headers: headers,
-    body: JSON.stringify({ query }),
-    cache: 'no-store' 
-  });
-
-  const { data } = await response.json();
-  
+  // @ts-ignore
   const projectsToDisplay = data?.projectSearch?.edges || [];
 
   if (projectsToDisplay.length === 0) {
@@ -56,8 +34,6 @@ const Home = async ({ searchParams }: Props) => {
       </section>
     )
   }
-
-  // console.log(data?.projectSearch?.pageInfo)
 
   return (
     <section className="flexStart flex-col paddings mb-16">
@@ -76,9 +52,13 @@ const Home = async ({ searchParams }: Props) => {
         ))}
       </section>
         <LoadMore 
+          // @ts-ignore
           startCursor={data?.projectSearch?.pageInfo?.startCursor} 
+          // @ts-ignore
           endCursor={data?.projectSearch?.pageInfo?.endCursor} 
+          // @ts-ignore
           hasPreviousPage={data?.projectSearch?.pageInfo?.hasPreviousPage} 
+          // @ts-ignore
           hasNextPage={data?.projectSearch?.pageInfo.hasNextPage}
         />
     </section>

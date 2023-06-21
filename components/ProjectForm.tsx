@@ -1,14 +1,14 @@
 "use client"
 
 import Image from 'next/image';
-import React, { ChangeEvent, FormEvent, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation';
 
 import FormField from './FormField';
 import CustomButton from './Button';
 import CustomMenu from './CustomMenu';
 import { categoryFilters } from '@/constant';
-import { updateProject, createNewProject } from '@/lib/actions';
+import { updateProject, createNewProject, fetchToken } from '@/lib/actions';
 import { FormState, ProjectNode } from '@/common.types';
 
 type Props = {
@@ -19,6 +19,16 @@ type Props = {
 
 const ProjectForm = ({ type, session, project }: Props) => {
     const router = useRouter()
+
+    const fetch = async() => {
+        const token = await fetchToken()
+        console.log("token (client side)", token)
+    }
+
+    useEffect(() => {
+        fetch()
+    }, [])
+
 
     const [submitting, setSubmitting] = useState<boolean>(false);
     const [form, setForm] = useState<FormState>({

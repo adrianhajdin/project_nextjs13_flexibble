@@ -28,13 +28,11 @@ export function isBase64DataURL(value: string) {
     return base64Regex.test(value);
 }
 
-export async function getApiConfig() {
-    // const apiUrl = process.env.GRAFBASE_API_URL
-    // const apiKey = process.env.GRAFBASE_API_KEY
-    // const isProduction = true
+export function getApiConfig() {
     const isProduction = process.env.NODE_ENV === 'production';
     const apiUrl = isProduction ? process.env.NEXT_PUBLIC_GRAFBASE_API_URL || '' : 'http://127.0.0.1:4000/graphql';
     const apiKey = isProduction ? process.env.NEXT_PUBLIC_GRAFBASE_API_KEY || '' : 'letmein';
+    const serverUrl = isProduction ? process.env.NEXT_PUBLIC_SERVER_URL : 'http://localhost:3000';
 
-    return { apiUrl, apiKey };
+    return { apiUrl, apiKey, serverUrl };
 }

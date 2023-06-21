@@ -41,21 +41,16 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       const email = session?.user?.email as string;
 
-      try {
-        // const result = await getUser(email)
+      try { 
+        const { apiUrl, apiKey } = await getApiConfig();
+        const client = new GraphQLClient(apiUrl, {
+            headers: {
+                'x-api-key': apiKey,
+            },
+        });
 
-            
-    const { apiUrl, apiKey } = await getApiConfig();
-
-    
-    const client = new GraphQLClient(apiUrl, {
-        headers: {
-            'x-api-key': apiKey,
-        },
-    });
-
-    const mutation = getUserQuery(email);
-    const data = await client.request(mutation);
+        const mutation = getUserQuery(email);
+        const data = await client.request(mutation);
 
 
         const newSession = {
@@ -77,8 +72,6 @@ export const authOptions: NextAuthOptions = {
       try {
         // @ts-ignore
         const userExists = await getUser(user.email)
-        
-        
         
         // @ts-ignore
         if (!userExists.user) {

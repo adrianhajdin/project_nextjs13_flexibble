@@ -96,6 +96,7 @@ const ProjectForm = ({ type, session, project }: Props) => {
                 <input
                     id="image"
                     type="file"
+                    accept='image/*'
                     required={type === "create" ? true : false}
                     className="absolute z-30 w-full opacity-0 h-full cursor-pointer"
                     onChange={(e) => handleChangeImage(e)}

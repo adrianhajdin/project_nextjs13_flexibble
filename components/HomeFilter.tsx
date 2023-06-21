@@ -4,18 +4,24 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { categoryFilters } from "@/constant";
-import { updateSearchParams } from "@/lib/utils";
+import { deleteSearchParams, updateSearchParams } from "@/lib/utils";
 
 const HomeFilter = () => {
   const router = useRouter();
-  const [tag, setTag] = useState("All");
+  const [tag, setTag] = useState("");
 
   const handleTags = (item: string) => {
-    const newPathName = updateSearchParams("category", item);
-    
-    router.push(newPathName);
+    if(tag === item) {
+      const newPathName = deleteSearchParams("category")
 
-    setTag(item)
+      router.push(newPathName)
+      setTag("")
+    } else {
+      const newPathName = updateSearchParams("category", item);
+      
+      router.push(newPathName);
+      setTag(item)
+    }
   }
 
   return (

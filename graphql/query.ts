@@ -2,11 +2,11 @@ export const getProjectsQuery = (category: string | null, startCursor: string | 
   let query = `projectSearch(`;
   
   if (startCursor) {
-    query += `last: 6, before: "${startCursor}"`;
+    query += `last: 8, before: "${startCursor}"`;
   } else if (endCursor) {
-    query += `first: 6, after: "${endCursor}"`;
+    query += `first: 8, after: "${endCursor}"`;
   } else {
-    query += `first: 6`;
+    query += `first: 8`;
   }
 
   if (category) {

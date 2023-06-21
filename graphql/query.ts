@@ -126,7 +126,7 @@ export const getProjectByIdQuery = (id: string) => {
   }`
 }
 
-export const getProjectsOfUserQuery = (id: string, last?:  string, cursor?: string | null) => {
+export const getProjectsOfUserQuery = (id: string, last: number = 5, cursor?: string | null) => {
   let query = `{
     user(by: {id: "${id}"}) {
       id

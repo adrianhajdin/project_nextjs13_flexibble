@@ -1,5 +1,6 @@
 import { AllProjectsType } from "@/common.types";
 import HomeFilter from "@/components/HomeFilter";
+import LoadMore from "@/components/LoadMore";
 // import LoadMore from "@/components/LoadMore";
 import ProjectCard from "@/components/ProjectCard";
 import { getProjectsQuery  } from "@/graphql/query";
@@ -38,6 +39,8 @@ const Home = async ({ searchParams }: Props) => {
   });
 
   const { data } = await response.json();
+
+  console.log({ data })
   
   const projectsToDisplay = data?.projectSearch?.edges || [];
 
@@ -66,9 +69,9 @@ const Home = async ({ searchParams }: Props) => {
           />
         ))}
       </section>
-      {/* {data?.projectSearch?.pageInfo?.hasNextPage && (
+      {data?.projectSearch?.pageInfo?.hasNextPage && (
         <LoadMore cursor={data?.projectSearch?.pageInfo?.endCursor} />
-      )} */}
+      )}
     </section>
   )
 };

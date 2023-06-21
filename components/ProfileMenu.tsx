@@ -67,13 +67,16 @@ const ProfileMenu = ({ session }: Props) => {
 
                         <div className="flex flex-col gap-3 pt-10 items-start w-full">
                             <Menu.Item>
-                                <Link href="/profile" className="text-sm">Work Preferences</Link>
+                                {/* @ts-ignore */}
+                                <Link href={`/profile/${session?.user?.id}`} className="text-sm">Work Preferences</Link>
                             </Menu.Item>
                             <Menu.Item>
-                                <Link href="/profile" className="text-sm">Settings</Link>
+                                {/* @ts-ignore */}
+                                <Link href={`/profile/${session?.user?.id}`} className="text-sm">Settings</Link>
                             </Menu.Item>
                             <Menu.Item>
-                                <Link href="/profile" className="text-sm">Profile</Link>
+                                {/* @ts-ignore */}
+                                <Link href={`/profile/${session?.user?.id}`} className="text-sm">Profile</Link>
                             </Menu.Item>
                         </div>
                         <div className="w-full flexStart border-t-[1px] border-nav-border mt-5 pt-5">

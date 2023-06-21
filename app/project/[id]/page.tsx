@@ -24,7 +24,7 @@ const Project = async ({ params: { id } }: { params: { id: string } }) => {
 
     return (
         <Modal>
-            {session?.user?.email === projectDetails?.createdBy?.email && (
+            {/* {session?.user?.email === projectDetails?.createdBy?.email && (
                 <section className="user-actions_section">
                     <Link href={renderLink()}>
                         <Image
@@ -38,10 +38,10 @@ const Project = async ({ params: { id } }: { params: { id: string } }) => {
 
                     <ProjectActions projectId={projectDetails?.id} />
                 </section>
-            )}
+            )} */}
 
-            <section className="flexBetween max-lg:flex-col gap-y-8 max-w-4xl w-full">
-                <div className="flexStart gap-5 w-full max-[400px]:flex-col">
+            <section className="flexBetween gap-y-8 max-w-4xl max-xs:flex-col w-full">
+                <div className="flex-1 flex items-start gap-5 w-full max-xs:flex-col">
                     <Link href={renderLink()}>
                         <Image
                             src={projectDetails?.createdBy?.avatarUrl}
@@ -52,9 +52,9 @@ const Project = async ({ params: { id } }: { params: { id: string } }) => {
                         />
                     </Link>
 
-                    <div className="flexStart flex-col gap-1">
+                    <div className="flex-1 flexStart flex-col gap-1">
                         <p className="self-start text-lg font-semibold">
-                            {projectDetails?.title}
+                            {projectDetails?.title} and blah blah and blah
                         </p>
                         <div className="user-info">
                             <Link href={renderLink()}>
@@ -67,6 +67,12 @@ const Project = async ({ params: { id } }: { params: { id: string } }) => {
                         </div>
                     </div>
                 </div>
+
+                {session?.user?.email === projectDetails?.createdBy?.email && (
+                    <div className="flex justify-end items-center gap-2">
+                        <ProjectActions projectId={projectDetails?.id} />
+                    </div>
+                )}
             </section>
 
             <section className="mt-14">

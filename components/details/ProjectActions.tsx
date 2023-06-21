@@ -32,7 +32,7 @@ const ProjectActions = ({ projectId }: Props) => {
     return (
         <>
             <Link href={`/edit-project/${projectId}`} className="flexCenter edit-action_btn">
-                <Image src="/pencile.svg" width={16} height={16} alt="edit" />
+                <Image src="/pencile.svg" width={20} height={20} alt="edit" />
             </Link>
 
             <button
@@ -41,7 +41,7 @@ const ProjectActions = ({ projectId }: Props) => {
                 className={`flexCenter delete-action_btn ${isDeleting ? "bg-gray" : "bg-primary-purple"}`}
                 onClick={handleDeleteProject}
             >
-                <Image src="/trash.svg" width={16} height={16} alt="delete" />
+                <Image src="/trash.svg" width={20} height={20} alt="delete" />
             </button>
         </>
     )

@@ -68,11 +68,11 @@ body {
 
 /* project actions component */
 .edit-action_btn {
-  @apply p-4 text-gray-100 bg-light-white-400 rounded-md text-sm font-medium w-full;
+  @apply p-4 text-gray-100 bg-light-white-400 rounded-md text-sm font-medium;
 }
 
 .delete-action_btn {
-  @apply p-4 text-gray-100 rounded-md text-sm font-medium w-full;
+  @apply p-4 text-gray-100 rounded-md text-sm font-medium;
 }
 
 /* Related Project Card Component */

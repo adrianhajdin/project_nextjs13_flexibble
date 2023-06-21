@@ -16,13 +16,16 @@ import { getProjectByIdQuery, getProjectsOfUserQuery, getUserQuery } from "@/gra
 // }
 
 export const fetchToken = async () => {
-    const isProduction = process.env.NODE_ENV === 'production';
-    const url = isProduction ? process.env.NEXT_PUBLIC_SERVER_URL : 'http://localhost:3000';
+    try {
+        const isProduction = process.env.NODE_ENV === 'production';
+        const url = isProduction ? process.env.NEXT_PUBLIC_SERVER_URL : 'http://localhost:3000';
 
-    const result = await fetch(`${url}/api/auth/token`)
-    return result.json()
+        const response = await fetch(`${url}/api/auth/token`)
+        return response.json()
+    } catch (err) {
+        return err
+    }
 }
-
 
 export const uploadImage = async (imagePath: string) => {
     try {

@@ -9,16 +9,11 @@ import RelatedProjects from "@/components/details/RelatedProjects"
 
 const Project = async ({ params: { id } }: { params: { id: string } }) => {
     const session = await getCurrentUser()
-
-    if (!id) return (
-        <p className="w-full text-center my-10 px-2">Oops, couldn&apos;t find project related to that id</p>
-    )
-
     const result = await getProjectDetails(id)
 
     // @ts-ignore
     if (!result?.project) return (
-        <p className="w-full text-center my-10 px-2">Failed to fetch project info</p>
+        <p className="no-result-text">Failed to fetch project info</p>
     )
 
     // @ts-ignore

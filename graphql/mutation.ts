@@ -85,16 +85,6 @@ export const createUserMutation = (name: string, email: string, avatarUrl: strin
 			}
 		}
 	}`
-	// return `mutation {
-  //     userCreate(input: { name: "${name}", email: "${email}", avatarUrl: "${avatarUrl}" }) {
-	// 			user {
-	// 				id
-	// 				name
-	// 				email
-	// 				avatarUrl
-	// 			}
-	// 		}
-	// 	}`
 }
 
 export const updateUserMutation = (form: UserFormProps, userId: string) => {

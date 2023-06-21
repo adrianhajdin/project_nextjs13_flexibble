@@ -150,7 +150,7 @@ export const createUser = async (name: string, email: string, avatarUrl: string)
     }
 }
 
-export const getUserProjects = async (id: string, last?: string, cursor?: string) => {
+export const getUserProjects = async (id: string, last?: number, cursor?: string) => {
     try {
         const { apiUrl, apiKey } = await getApiConfig();
 

@@ -1,4 +1,4 @@
-import { g, config } from '@grafbase/sdk';
+import { g, config, auth } from '@grafbase/sdk';
 
 // Define the User model
 const User = g.model('User', {
@@ -36,6 +36,15 @@ const Project = g.model('Project', {
 //when creating a project, just make a call to grafbase to get all categories, map the ids, and then when creating a project
 // connect it to category -> using the connect feature by passing the id. when clicking at teh cateogry, just make a call to grafbase -> to fetch category by slug and then get all projects by category
 
+const jwt = auth.JWT({
+  issuer: g.env('ISSUER_URL'),
+  secret: g.env('NEXTAUTH_SECRET')
+})
+
 export default config({
-  schema: g
+  schema: g,
+  auth: {
+    providers: [jwt],
+    rules: (rules) => rules.private()
+  }
 })

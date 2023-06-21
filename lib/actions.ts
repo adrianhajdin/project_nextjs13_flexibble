@@ -1,19 +1,28 @@
 
 import { FormState } from "@/common.types";
 
-import { makeRequest } from "./request";
+// import { makeRequest } from "./request";
 import { getApiConfig, isBase64DataURL } from "./utils";
 import { GraphQLClient } from "graphql-request";
 import { createProjectMutation, createUserMutation, deleteProjectMutation, updateProjectMutation, updateUserMutation } from "@/graphql/mutation";
 import { getProjectByIdQuery, getProjectsOfUserQuery, getUserQuery } from "@/graphql/query";
-import { g } from '@grafbase/sdk';
+// import { g } from '@grafbase/sdk';
 
-type UserProps = {
-    name: string
-    description: string
-    githubUrl: string
-    linkedinUrl: string
+// type UserProps = {
+//     name: string
+//     description: string
+//     githubUrl: string
+//     linkedinUrl: string
+// }
+
+export const fetchToken = async () => {
+    const isProduction = process.env.NODE_ENV === 'production';
+    const url = isProduction ? process.env.NEXT_PUBLIC_SERVER_URL : 'http://localhost:3000';
+
+    const result = await fetch(`${url}/api/auth/token`)
+    return result.json()
 }
+
 
 export const uploadImage = async (imagePath: string) => {
     try {

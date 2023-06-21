@@ -4,6 +4,7 @@ import LoadMore from "@/components/LoadMore";
 // import LoadMore from "@/components/LoadMore";
 import ProjectCard from "@/components/ProjectCard";
 import { getProjectsQuery  } from "@/graphql/query";
+import { fetchToken } from "@/lib/actions";
 // import { GraphQLClient } from "graphql-request";
 import { getApiConfig } from "@/lib/utils";
 
@@ -23,6 +24,9 @@ const Home = async ({ searchParams }: Props) => {
   let category = searchParams.category || null;
   let endCursor = searchParams.endcursor || null
   let startCursor = searchParams.startcursor || null
+
+  const token = await fetchToken()
+  console.log("token?", token)
   
   const { apiUrl, apiKey } = await getApiConfig();
 

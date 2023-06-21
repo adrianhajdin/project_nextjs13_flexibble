@@ -12,7 +12,7 @@ export default function Modal({ children }: { children: ReactNode }) {
     const onDismiss = useCallback(() => {
         window.document.body.style.overflowY = "auto";
         
-        router.back();
+        router.push("/");
     }, [router]);
 
     const handleClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {

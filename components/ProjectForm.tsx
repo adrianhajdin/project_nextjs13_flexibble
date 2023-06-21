@@ -20,15 +20,6 @@ type Props = {
 const ProjectForm = ({ type, session, project }: Props) => {
     const router = useRouter()
 
-    const fetch = async() => {
-        const token = await fetchToken()
-        console.log("token (client side)", token)
-    }
-
-    useEffect(() => {
-        fetch()
-    }, [])
-
 
     const [submitting, setSubmitting] = useState<boolean>(false);
     const [form, setForm] = useState<FormState>({
@@ -72,15 +63,17 @@ const ProjectForm = ({ type, session, project }: Props) => {
         e.preventDefault()
         setSubmitting(true)
 
+        const { token } = await fetchToken()
+
         try {
             if (type === "create") {
-                await createNewProject(form, session?.user?.id)
+                await createNewProject(form, session?.user?.id, token)
                 router.push("/")
             }
             
             if (type === "edit") {
                 // @ts-ignore
-                await updateProject(form, project?.id)
+                await updateProject(form, project?.id, token)
                 router.push("/")
             }
 

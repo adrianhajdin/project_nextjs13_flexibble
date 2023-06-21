@@ -50,28 +50,38 @@ export const fetchAllProjects = async (category: string | null, startCursor: str
     }
 }
 
-export const createNewProject = async (form: FormState, creatorId: string) => {
+export const createNewProject = async (form: FormState, creatorId: string, token: string) => {
     try {
         const imageUrl = await uploadImage(form.image);
 
         if (imageUrl.url) {
             const newForm = { ...form, image: imageUrl.url, creatorId }
 
-            const client = new GraphQLClient(apiUrl, {
-                headers: { 'x-api-key': apiKey  },
-            });
+            // const client = new GraphQLClient(apiUrl, {
+            //     headers: {
+            //         Authorization: `Bearer ${token}`,
+            //     }
+            // });
     
-            const mutation = createProjectMutation(newForm);
-            
-            await client.request(mutation);
+            // const mutation = createProjectMutation(newForm);
+            // await client.request(mutation);
+            await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${token}` 
+                },
+                body: JSON.stringify({query: createProjectMutation(newForm)})
+            })
         }
     } catch (err) {
         console.log("Error: ", err)
     }
 };
 
-export const updateProject = async (form: FormState, projectId: string) => {
+export const updateProject = async (form: FormState, projectId: string, token: string) => {
     let newForm = form
+
+    console.log("update project action",token)
 
     try {
         const isBase64 = isBase64DataURL(form.image);
@@ -86,7 +96,7 @@ export const updateProject = async (form: FormState, projectId: string) => {
                 
         const client = new GraphQLClient(apiUrl, {
             headers: {
-                'x-api-key': apiKey,
+                Authorization: `Bearer ${token}`
             },
         });
 

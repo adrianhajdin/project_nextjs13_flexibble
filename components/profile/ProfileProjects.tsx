@@ -1,6 +1,6 @@
 import { ProjectNode } from "@/common.types"
+import LoadMore from "../LoadMore";
 import ProjectCard from "../ProjectCard"
-// import LoadMore from "../LoadMore";
 
 type Props = {
     user: {
@@ -11,6 +11,12 @@ type Props = {
             edges?: {
                 node: ProjectNode;
             }[];
+            pageInfo?: {
+                startCursor: string;
+                endCursor: string;
+                hasPreviousPage: string
+                hasNextPage: string
+            }
         };
     };
 };
@@ -34,11 +40,16 @@ const ProfileProjects = ({ user }: Props) => {
                 )}
             </div>
 
-            {/* @ts-ignore */}
-            {/* {user?.projects?.pageInfo?.hasPreviousPage && (
-                // @ts-ignore
-                <LoadMore cursor={user?.projects?.pageInfo?.startCursor} />
-            )} */}
+                <LoadMore 
+                    // @ts-ignore
+                    startCursor={user?.projects?.pageInfo?.startCursor} 
+                    // @ts-ignore
+                    endCursor={user?.projects?.pageInfo?.endCursor}
+                    // @ts-ignore
+                    hasPreviousPage={user?.projects?.pageInfo?.hasPreviousPage}
+                    // @ts-ignore
+                    hasNextPage={user?.projects?.pageInfo?.hasNexPage}
+                />
 
         </>
     )

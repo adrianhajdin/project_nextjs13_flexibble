@@ -28,9 +28,6 @@ const Project = g.model('Project', {
   rules.private().create().delete().update()
 })
 
-//! Not getting recognized
-//! secret: g.env('NEXTAUTH_SECRET')
-
 const jwt = auth.JWT({
   issuer: 'grafbase',
   secret:  g.env('NEXTAUTH_SECRET')

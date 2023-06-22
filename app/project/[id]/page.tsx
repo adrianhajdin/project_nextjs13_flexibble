@@ -6,10 +6,11 @@ import { getProjectDetails } from "@/lib/actions"
 import Modal from "@/components/Modal"
 import ProjectActions from "@/components/details/ProjectActions"
 import RelatedProjects from "@/components/details/RelatedProjects"
+import { ProjectInterface } from "@/common.types"
 
 const Project = async ({ params: { id } }: { params: { id: string } }) => {
     const session = await getCurrentUser()
-    const result = await getProjectDetails(id)
+    const result = await getProjectDetails(id) as { project?: ProjectInterface}
 
     if (!result?.project) return (
         <p className="no-result-text">Failed to fetch project info</p>

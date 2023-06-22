@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { getUserProjects } from '@/lib/actions'
 import RelatedProjectCard from './RelatedProjectCard'
-import { AllProjectsType, UserNode } from '@/common.types'
+import { ProjectInterface, UserProfile } from '@/common.types'
 
 type Props = {
     userId: string
@@ -10,9 +10,9 @@ type Props = {
 }
 
 const RelatedProjects = async ({ userId, projectId }: Props) => {
-    const result = await getUserProjects(userId)
+    const result = await getUserProjects(userId) as { user?: UserProfile}
 
-    const filteredProjects = result?.user?.projects?.edges?.filter(({ node }: { node: UserNode }) => node?.id !== projectId)
+    const filteredProjects = result?.user?.projects?.edges?.filter(({ node }: { node: ProjectInterface }) => node?.id !== projectId)
 
     if (filteredProjects?.length === 0) return null;
 
@@ -31,7 +31,7 @@ const RelatedProjects = async ({ userId, projectId }: Props) => {
             </div>
 
             <div className="related_projects-grid">
-                {filteredProjects?.map(({ node }: AllProjectsType) => (
+                {filteredProjects?.map(({ node }: { node: ProjectInterface }) => (
                     <RelatedProjectCard
                         key={`${node?.id}`}
                         id={node?.id}

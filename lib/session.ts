@@ -40,7 +40,7 @@ export const authOptions: NextAuthOptions = {
     logo: "/logo.svg",
   },
   callbacks: {
-    async session({ session, token }) {
+    async session({ session }) {
       const email = session?.user?.email as string;
 
       try { 

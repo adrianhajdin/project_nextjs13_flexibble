@@ -81,7 +81,7 @@ const Project = async ({ params: { id } }: { params: { id: string } }) => {
                         🚀 <span className="underline">Live Site</span> 
                     </Link>
                 </div>
-            </section>
+            </section>
       
             <section className="flexCenter w-full gap-8 mt-28">
                 <span className="w-full h-0.5 bg-light-white-200" />

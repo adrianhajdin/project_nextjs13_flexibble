@@ -1,48 +1,76 @@
-export const getProjectsQuery = (category: string | null, startCursor: string | null, endCursor: string | null) => {
-  let query = `projectSearch(`;
+// export const getProjectsQuery = (category: string | null, startCursor: string | null, endCursor: string | null) => {
+//   let query = `projectSearch(`;
   
-  if (startCursor) {
-    query += `last: 4, before: "${startCursor}"`;
-  } else if (endCursor) {
-    query += `first: 4, after: "${endCursor}"`;
-  } else {
-    query += `first: 4`;
-  }
+//   if (startCursor) {
+//     query += `last: 4, before: "${startCursor}"`;
+//   } else if (endCursor) {
+//     query += `first: 4, after: "${endCursor}"`;
+//   } else {
+//     query += `first: 4`;
+//   }
 
-  if (category) {
-    query += `, filter: { category: { eq: "${category}" } }`;
-  }
+//   if (category) {
+//     query += `, filter: { category: { eq: "${category}" } }`;
+//   }
 
-  query += ')';
+//   query += ')';
 
-  return `{
-    ${query} {
-      pageInfo {
-        hasNextPage
-        hasPreviousPage
-        startCursor
-        endCursor
-      }
-      edges {
-        node {
-          title
-          githubUrl
-          description
-          liveSiteUrl
+//   return `{
+//     ${query} {
+//       pageInfo {
+//         hasNextPage
+//         hasPreviousPage
+//         startCursor
+//         endCursor
+//       }
+//       edges {
+//         node {
+//           title
+//           githubUrl
+//           description
+//           liveSiteUrl
+//           id
+//           image
+//           createdBy {
+//             id
+//             email
+//             name
+//             avatarUrl
+//           }
+//           category
+//         }
+//       }
+//     }
+//   }`;
+// };
+
+export const getProjectsQuery = `query getProjects($category: String, $startCursor: String, $endCursor: String) {
+  projectSearch(first: 4, last: 4, after: $endCursor, before: $startCursor, filter: {category: {eq: $category}}) {
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+    edges {
+      node {
+        title
+        githubUrl
+        description
+        liveSiteUrl
+        id
+        image
+        category
+        createdBy {
           id
-          image
-          createdBy {
-            id
-            email
-            name
-            avatarUrl
-          }
-          category
+          email
+          name
+          avatarUrl
         }
       }
     }
-  }`;
-};
+  }
+}`
 
 export const getProjectByIdQuery = (id: string) => {
   return `{

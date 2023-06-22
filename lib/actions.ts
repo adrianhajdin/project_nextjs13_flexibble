@@ -35,16 +35,28 @@ export const uploadImage = async (imagePath: string) => {
 
 export const fetchAllProjects = async (category: string | null, startCursor: string | null, endCursor: string | null) => {
     try {
-        const client = new GraphQLClient(apiUrl, {
+        // const client = new GraphQLClient(apiUrl, {
+        //     headers: {
+        //         'x-api-key': apiKey
+        //     }
+        // })
+
+        // const query = getProjectsQuery(category, startCursor, endCursor)
+        // const data = await client.request(query);
+
+        // return data;
+        const response = await fetch(apiUrl, {
+            method: 'POST',
             headers: {
                 'x-api-key': apiKey
-            }
+            },
+            body: JSON.stringify({query: getProjectsQuery, variables: {category: category, startCursor: startCursor, endCursor: endCursor}})
         })
 
-        const query = getProjectsQuery(category, startCursor, endCursor)
-        const data = await client.request(query);
+        const data = await response.json()
+        console.log("response", data)
 
-        return data;
+        return data
     } catch (err) {
         console.log("Error: ", err)
     }

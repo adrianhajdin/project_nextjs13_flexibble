@@ -11,43 +11,49 @@ type Props = {
 }
 
 const ProfilePage = ({ user }: Props) => (
-    <section className='flexCenter flex-col w-full paddings !lg:py-[85px] !py-16'>
-        <section className="flexBetween max-lg:flex-col gap-y-10 w-full">
-            <div>
+    <section className='flexCenter flex-col max-w-10xl w-full mx-auto paddings'>
+        <section className="flexBetween max-lg:flex-col gap-10 w-full">
+            <div className='flex items-start flex-col w-full'>
                 <Image src={user?.avatarUrl} width={100} height={100} className="rounded-full" alt="user image" />
-                <p className="text-[35px] leading-[42px] font-bold mt-[40px]">{user?.name}</p>
-                <p className="md:text-[47px] text-[30px] md:leading-[61px] leading-[32px] font-extrabold md:mt-[40px] mt-5 lg:max-w-[444px]">I’m Software Engineer at JSM 👋</p>
-                <div className="flex mt-[30px] gap-5">
-                <Button title="Follow" leftIcon="/plus-round.svg" bgColor="bg-light-white-400" textColor="text-black-100" />
+                <p className="text-4xl font-bold mt-10">{user?.name}</p>
+                <p className="md:text-5xl text-3xl font-extrabold md:mt-10 mt-5 max-w-lg">I’m Software Engineer at JSM 👋</p>
+                
+                <div className="flex mt-8 gap-5 w-full flex-wrap">
+                    <Button 
+                        title="Follow" 
+                        leftIcon="/plus-round.svg" 
+                        bgColor="bg-light-white-400 !w-max" 
+                        textColor="text-black-100" 
+                    />
                     <Link href={`mailto:${user?.email}`}>
                         <Button title="Hire Me" leftIcon="/email.svg" />
                     </Link>
                 </div>
             </div>
 
-           {/* @ts-ignore */}
-           {user?.projects?.edges?.length > 0 ? (
-               <Image
-                   // @ts-ignore
-                   src={user?.projects?.edges[0]?.node?.image}
-                   width={739}
-                   height={554}
-                   alt="project image"
-                   className='rounded-xl'
-               />
-           ) : (
-               <Image
-                   src="/profile-post.png"
-                   width={739}
-                   height={554}
-                   alt="project image"
-                   className='rounded-xl'
-               />
-           )}
+            {/* @ts-ignore */}
+            {user?.projects?.edges?.length > 0 ? (
+                <Image
+                    // @ts-ignore
+                    src={user?.projects?.edges[0]?.node?.image}
+                    alt="project image"
+                    width={739}
+                    height={554}
+                    className='rounded-xl object-contain'
+                />
+            ) : (
+                <Image
+                    src="/profile-post.png"
+                    width={739}
+                    height={554}
+                    alt="project image"
+                    className='rounded-xl'
+                />
+            )}
        </section>
 
-       <section className="flexStart flex-col lg:mt-[118px] mt-16 w-full">
-           <p className="w-full text-left">Recent Work</p>
+       <section className="flexStart flex-col lg:mt-28 mt-16 w-full">
+           <p className="w-full text-left text-lg font-semibold">Recent Work</p>
             {/* @ts-ignore */}
            <ProfileProjects user={user} />
        </section>

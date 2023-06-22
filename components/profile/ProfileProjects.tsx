@@ -24,7 +24,7 @@ type Props = {
 const ProfileProjects = ({ user }: Props) => {
     return (
         <>
-            <div className="grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 mt-5">
+            <div className="profile_projects">
                 {user?.projects?.edges?.map(
                     ({ node }: { node: ProjectNode }) => (
                         <ProjectCard

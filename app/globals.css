@@ -27,11 +27,11 @@ body {
 }
 
 .text-small {
-  @apply text-[14px] leading-[17px] font-medium;
+  @apply text-sm font-medium;
 }
 
 .paddings {
-  @apply lg:px-[80px] py-6 px-[18px];
+  @apply lg:px-20 py-6 px-5;
 }
 
 ::-webkit-scrollbar {
@@ -158,4 +158,9 @@ body {
 
 .form_image-input {
   @apply absolute z-30 w-full opacity-0 h-full cursor-pointer;
+}
+
+/* Profile Projects */
+.profile_projects {
+  @apply grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 mt-5;
 }

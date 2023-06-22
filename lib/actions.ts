@@ -1,18 +1,12 @@
 import { GraphQLClient } from "graphql-request";
-import { getApiConfig, isBase64DataURL } from "./utils";
-import {
-  createProjectMutation,
-  createUserMutation,
-  deleteProjectMutation,
-  updateProjectMutation,
-  getProjectByIdQuery,
-  getProjectsOfUserQuery,
-  getUserQuery,
-  projectsQuery,
-} from "@/graphql";
+
+import { createProjectMutation, createUserMutation, deleteProjectMutation, updateProjectMutation, getProjectByIdQuery, getProjectsOfUserQuery, getUserQuery, projectsQuery } from "@/graphql";
 import { ProjectForm } from "@/common.types";
 
-const { apiUrl, apiKey, serverUrl } = getApiConfig();
+const isProduction = process.env.NODE_ENV === 'production';
+const apiUrl = isProduction ? process.env.NEXT_PUBLIC_GRAFBASE_API_URL || '' : 'http://127.0.0.1:4000/graphql';
+const apiKey = isProduction ? process.env.NEXT_PUBLIC_GRAFBASE_API_KEY || '' : 'letmein';
+const serverUrl = isProduction ? process.env.NEXT_PUBLIC_SERVER_URL : 'http://localhost:3000';
 
 const client = new GraphQLClient(apiUrl);
 
@@ -78,11 +72,17 @@ export const createNewProject = async (form: ProjectForm, creatorId: string, tok
 };
 
 export const updateProject = async (form: ProjectForm, projectId: string, token: string) => {
-  let newForm = form;
+  function isBase64DataURL(value: string) {
+    const base64Regex = /^data:image\/[a-z]+;base64,/;
+    
+    return base64Regex.test(value);
+  }
+
   const isBase64 = isBase64DataURL(form.image);
 
   if (isBase64) {
     const imageUrl = await uploadImage(form.image);
+
     if (imageUrl.url) {
 
       client.setHeader("Authorization", `Bearer ${token}`);

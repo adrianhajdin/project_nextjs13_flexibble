@@ -28,6 +28,7 @@ export const projectsQuery = `
   }
 `;
 
+//TODO UPDATE QUERIES TO USE VARIABLES
 
 export const getProjectByIdQuery = (id: string) => {
   return `{

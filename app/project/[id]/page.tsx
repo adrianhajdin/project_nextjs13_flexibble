@@ -54,16 +54,16 @@ const Project = async ({ params: { id } }: { params: { id: string } }) => {
 
                     <div className="flex-1 flexStart flex-col gap-1">
                         <p className="self-start text-lg font-semibold">
-                            {projectDetails?.title} and blah blah and blah
+                            {projectDetails?.title}
                         </p>
                         <div className="user-info">
                             <Link href={renderLink()}>
                                 {projectDetails?.createdBy?.name}
                             </Link>
                             <Image src="/dot.svg" width={4} height={4} alt="dot" />
-                            <p className="text-primary-purple font-semibold">
+                            <Link href={`/?category=${projectDetails.category}`} className="text-primary-purple font-semibold"> 
                                 {projectDetails?.category}
-                            </p>
+                            </Link>
                         </div>
                     </div>
                 </div>

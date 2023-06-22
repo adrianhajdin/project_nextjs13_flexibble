@@ -19,7 +19,7 @@ const EditProject = async ({ params: { id } }: { params: { id: string } }) => {
   return (
     <Modal>
       <h3 className="modal-head-text">
-        Edit Project
+        Edit a Project
       </h3>
 
       {/* @ts-ignore */}

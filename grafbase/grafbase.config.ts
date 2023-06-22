@@ -25,18 +25,22 @@ const Project = g.model('Project', {
   createdBy: g.relation(() => User),
 }).auth((rules) => {
   rules.public().read()
+  rules.private().create().delete().update()
 })
+
+//! Not getting recognized
+//! secret: g.env('NEXTAUTH_SECRET')
 
 const jwt = auth.JWT({
   issuer: 'grafbase',
-  secret: g.env('NEXTAUTH_SECRET')
+  secret:  g.env('NEXTAUTH_SECRET')
 })
 
 export default config({
   schema: g,
   auth: {
     providers: [jwt],
-    rules: (rules) => rules.private().create().update().delete()
+    rules: (rules) => rules.private()
   }
 })
 

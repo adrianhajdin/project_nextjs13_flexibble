@@ -36,7 +36,7 @@ export default config({
   schema: g,
   auth: {
     providers: [jwt],
-    rules: (rules) => rules.private()
+    rules: (rules) => rules.private().create().update().delete()
   }
 })
 

@@ -7,17 +7,17 @@ import { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 
 type UserProps = {
-    name?: string | null | undefined;
-    email?: string | null | undefined;
-    image?: string | null | undefined;
+    name: string;
+    email: string;
+    image: string;
+    id: string;
 };
-
+  
 type Props = {
     session: {
-        user?: UserProps;
+      user: UserProps;
     };
 };
-
 
 const ProfileMenu = ({ session }: Props) => {
     const [openModal, setOpenModal] = useState(false);
@@ -67,15 +67,12 @@ const ProfileMenu = ({ session }: Props) => {
 
                         <div className="flex flex-col gap-3 pt-10 items-start w-full">
                             <Menu.Item>
-                                {/* @ts-ignore */}
                                 <Link href={`/profile/${session?.user?.id}`} className="text-sm">Work Preferences</Link>
                             </Menu.Item>
                             <Menu.Item>
-                                {/* @ts-ignore */}
                                 <Link href={`/profile/${session?.user?.id}`} className="text-sm">Settings</Link>
                             </Menu.Item>
                             <Menu.Item>
-                                {/* @ts-ignore */}
                                 <Link href={`/profile/${session?.user?.id}`} className="text-sm">Profile</Link>
                             </Menu.Item>
                         </div>

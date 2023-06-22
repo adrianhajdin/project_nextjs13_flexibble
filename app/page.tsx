@@ -4,7 +4,6 @@ import LoadMore from "@/components/LoadMore";
 import ProjectCard from "@/components/ProjectCard";
 import { fetchAllProjects } from "@/lib/actions";
 
-
 type SearchParams = {
   category?: string | null;
   endcursor?: string | null;
@@ -25,7 +24,6 @@ const Home = async ({ searchParams }: Props) => {
 
   const data = await fetchAllProjects(category, endCursor)
 
-  // @ts-ignore
   const projectsToDisplay = data?.projectSearch?.edges || [];
 
   if (projectsToDisplay.length === 0) {
@@ -54,13 +52,9 @@ const Home = async ({ searchParams }: Props) => {
         ))}
       </section>
         <LoadMore 
-          // @ts-ignore
           startCursor={data?.projectSearch?.pageInfo?.startCursor} 
-          // @ts-ignore
           endCursor={data?.projectSearch?.pageInfo?.endCursor} 
-          // @ts-ignore
           hasPreviousPage={data?.projectSearch?.pageInfo?.hasPreviousPage} 
-          // @ts-ignore
           hasNextPage={data?.projectSearch?.pageInfo.hasNextPage}
         />
     </section>

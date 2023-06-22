@@ -1,24 +1,9 @@
-import { ProjectNode } from "@/common.types"
+import { ProjectInterface, UserProfile } from "@/common.types"
 import LoadMore from "../LoadMore";
 import ProjectCard from "../ProjectCard"
 
 type Props = {
-    user: {
-        name: string;
-        avatarUrl: string;
-        id: string;
-        projects?: {
-            edges?: {
-                node: ProjectNode;
-            }[];
-            pageInfo?: {
-                startCursor: string;
-                endCursor: string;
-                hasPreviousPage: string
-                hasNextPage: string
-            }
-        };
-    };
+    user: UserProfile
 };
 
 const ProfileProjects = ({ user }: Props) => {
@@ -26,7 +11,7 @@ const ProfileProjects = ({ user }: Props) => {
         <>
             <div className="profile_projects">
                 {user?.projects?.edges?.map(
-                    ({ node }: { node: ProjectNode }) => (
+                    ({ node }: { node: ProjectInterface }) => (
                         <ProjectCard
                             key={`${node?.id}`}
                             id={node?.id}
@@ -40,16 +25,12 @@ const ProfileProjects = ({ user }: Props) => {
                 )}
             </div>
 
-                <LoadMore 
-                    // @ts-ignore
-                    startCursor={user?.projects?.pageInfo?.startCursor} 
-                    // @ts-ignore
-                    endCursor={user?.projects?.pageInfo?.endCursor}
-                    // @ts-ignore
-                    hasPreviousPage={user?.projects?.pageInfo?.hasPreviousPage}
-                    // @ts-ignore
-                    hasNextPage={user?.projects?.pageInfo?.hasNexPage}
-                />
+            <LoadMore 
+                startCursor={user?.projects?.pageInfo?.startCursor} 
+                endCursor={user?.projects?.pageInfo?.endCursor}
+                hasPreviousPage={user?.projects?.pageInfo?.hasPreviousPage}
+                hasNextPage={user?.projects?.pageInfo?.hasNextPage}
+            />
 
         </>
     )

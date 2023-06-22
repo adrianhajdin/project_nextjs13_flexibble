@@ -1,4 +1,4 @@
-import { UserNode } from '@/common.types'
+import { UserProfile } from '@/common.types'
 import Image from 'next/image'
 
 import ProfileProjects from './ProfileProjects'
@@ -6,8 +6,7 @@ import Link from 'next/link'
 import Button from "../Button";
 
 type Props = {
-    user: UserNode;
-    sessionUserId: string | undefined | null;
+    user: UserProfile;
 }
 
 const ProfilePage = ({ user }: Props) => (
@@ -31,10 +30,8 @@ const ProfilePage = ({ user }: Props) => (
                 </div>
             </div>
 
-            {/* @ts-ignore */}
             {user?.projects?.edges?.length > 0 ? (
                 <Image
-                    // @ts-ignore
                     src={user?.projects?.edges[0]?.node?.image}
                     alt="project image"
                     width={739}
@@ -54,7 +51,6 @@ const ProfilePage = ({ user }: Props) => (
 
        <section className="flexStart flex-col lg:mt-28 mt-16 w-full">
            <p className="w-full text-left text-lg font-semibold">Recent Work</p>
-            {/* @ts-ignore */}
            <ProfileProjects user={user} />
        </section>
    </section>

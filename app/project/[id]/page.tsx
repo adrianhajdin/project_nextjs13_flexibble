@@ -11,35 +11,16 @@ const Project = async ({ params: { id } }: { params: { id: string } }) => {
     const session = await getCurrentUser()
     const result = await getProjectDetails(id)
 
-    // @ts-ignore
     if (!result?.project) return (
         <p className="no-result-text">Failed to fetch project info</p>
     )
 
-    // @ts-ignore
     const projectDetails = result?.project
 
-    // @ts-ignore
     const renderLink = () => `/profile/${projectDetails?.createdBy?.id}`
 
     return (
         <Modal>
-            {/* {session?.user?.email === projectDetails?.createdBy?.email && (
-                <section className="user-actions_section">
-                    <Link href={renderLink()}>
-                        <Image
-                            src={projectDetails?.createdBy?.avatarUrl}
-                            width={40}
-                            height={40}
-                            alt="profile"
-                            className="rounded-full"
-                        />
-                    </Link>
-
-                    <ProjectActions projectId={projectDetails?.id} />
-                </section>
-            )} */}
-
             <section className="flexBetween gap-y-8 max-w-4xl max-xs:flex-col w-full">
                 <div className="flex-1 flex items-start gap-5 w-full max-xs:flex-col">
                     <Link href={renderLink()}>
@@ -105,7 +86,6 @@ const Project = async ({ params: { id } }: { params: { id: string } }) => {
                 <span className="w-full h-0.5 bg-light-white-200" />
             </section>
 
-            {/* @ts-ignore */}
             <RelatedProjects userId={projectDetails?.createdBy?.id} projectId={projectDetails?.id} />
         </Modal>
     )

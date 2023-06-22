@@ -141,3 +141,26 @@ const nextConfig = {
 
 module.exports = nextConfig
 ```
+
+### Run Next.js
+
+Open a new terminal and,
+```bash
+npm run dev
+```
+
+### Run Grafbase
+
+Open another new terminal and,
+```bash
+npx grafbase@0.24 dev
+```
+
+After successful installation, you'll see this:
+```bash
+📡 Listening on port 4000
+Pathfinder: http://127.0.0.1:4000
+Endpoint:   http://127.0.0.1:4000/graphql
+```
+
+Open the local Pathfinder to perform database operations  

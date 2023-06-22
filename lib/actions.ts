@@ -45,17 +45,23 @@ export const fetchAllProjects = async (category: string | null, startCursor: str
         // const data = await client.request(query);
 
         // return data;
+
+        const variables = {
+            ...(category && { category }),
+            ...(startCursor && { startCursor }),
+            ...(endCursor && { endCursor }),
+        };
+
         const response = await fetch(apiUrl, {
             method: 'POST',
             headers: {
                 'x-api-key': apiKey
             },
-            body: JSON.stringify({query: getProjectsQuery, variables: {category: category, startCursor: startCursor, endCursor: endCursor}})
+            body: JSON.stringify({query: getProjectsQuery, variables})
         })
 
         const data = await response.json()
         console.log("response", data)
-
         return data
     } catch (err) {
         console.log("Error: ", err)

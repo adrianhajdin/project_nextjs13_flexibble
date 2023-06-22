@@ -18,7 +18,7 @@ const FormField = ({ type, title, state, placeholder, isTextArea, setState }: Pr
                 <textarea
                     placeholder={placeholder}
                     value={state}
-                    className="w-full outline-0 bg-light-white-100 rounded-xl p-4"
+                    className="form_field-input"
                     onChange={(e) => setState(e.target.value)}
                 />
             ) : (
@@ -27,7 +27,7 @@ const FormField = ({ type, title, state, placeholder, isTextArea, setState }: Pr
                     placeholder={placeholder}
                     required
                     value={state}
-                    className="w-full outline-0 bg-light-white-100 rounded-xl p-4"
+                    className="form_field-input"
                     onChange={(e) => setState(e.target.value)}
                 />
             )}

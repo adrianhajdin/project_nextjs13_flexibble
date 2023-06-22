@@ -14,7 +14,6 @@ type Props = {
 };
 
 
-
 const ProjectCard = ({ id, image, title, name, avatarUrl, userId }: Props) => {
     const [randomLikes, setRandomLikes] = useState(0);
     const [randomViews, setRandomViews] = useState('');
@@ -35,7 +34,7 @@ const ProjectCard = ({ id, image, title, name, avatarUrl, userId }: Props) => {
                     alt="project image"
                 />
 
-                <div className="hidden group-hover:flex justify-end items-end w-full h-1/3 bg-gradient-to-b from-transparent to-black/50 rounded-b-2xl gap-2 absolute bottom-0 right-0 font-semibold text-lg text-white p-4">
+                <div className="hidden group-hover:flex profile_card-title">
                     <p className="w-full">{title}</p>
                 </div>
             </Link>

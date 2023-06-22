@@ -54,7 +54,7 @@ const Project = async ({ params: { id } }: { params: { id: string } }) => {
 
                     <div className="flex-1 flexStart flex-col gap-1">
                         <p className="self-start text-lg font-semibold">
-                            {projectDetails?.title} and blah blah and blah
+                            {projectDetails?.title}
                         </p>
                         <div className="user-info">
                             <Link href={renderLink()}>

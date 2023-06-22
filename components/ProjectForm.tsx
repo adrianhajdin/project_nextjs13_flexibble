@@ -88,11 +88,11 @@ const ProjectForm = ({ type, session, project }: Props) => {
     return (
         <form
             onSubmit={handleFormSubmit}
-            className="flexStart flex-col w-full lg:pt-24 pt-12 gap-10 text-lg max-w-5xl mx-auto">
-            <div className="flexStart w-full lg:min-h-[400px] min-h-[200px] relative">
+            className="flexStart form">
+            <div className="flexStart form_image-container">
                 <label
                     htmlFor="poster"
-                    className="flexCenter z-10 text-center w-full h-full p-20 text-gray-100 border-2 border-gray-50 border-dashed"
+                    className="flexCenter form_image-label"
                 >
                     {!form.image && 'Choose a poster for your project'}
                 </label>
@@ -101,7 +101,7 @@ const ProjectForm = ({ type, session, project }: Props) => {
                     type="file"
                     accept='image/*'
                     required={type === "create" ? true : false}
-                    className="absolute z-30 w-full opacity-0 h-full cursor-pointer"
+                    className="form_image-input"
                     onChange={(e) => handleChangeImage(e)}
                 />
                 {form.image && (

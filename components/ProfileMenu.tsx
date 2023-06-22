@@ -49,7 +49,7 @@ const ProfileMenu = ({ session }: Props) => {
                 >
                     <Menu.Items
                         static
-                        className="flexStart flex-col absolute right-1/2 translate-x-1/2 mt-3 p-7 sm:min-w-[300px] rounded-xl bg-white border border-nav-border shadow-menu"
+                        className="flexStart profile_menu-items"
                         onMouseLeave={() => setOpenModal(false)}
                     >
                         <div className="flex flex-col items-center gap-y-4">
@@ -79,7 +79,7 @@ const ProfileMenu = ({ session }: Props) => {
                                 <Link href={`/profile/${session?.user?.id}`} className="text-sm">Profile</Link>
                             </Menu.Item>
                         </div>
-                        <div className="w-full flexStart border-t-[1px] border-nav-border mt-5 pt-5">
+                        <div className="w-full flexStart border-t border-nav-border mt-5 pt-5">
                             <Menu.Item>
                                 <button type="button" className="text-sm" onClick={() => signOut()}> 
                                     Sign out

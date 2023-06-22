@@ -21,7 +21,6 @@ const EditProject = async ({ params: { id } }: { params: { id: string } }) => {
     <Modal>
       <h3 className="modal-head-text">Edit Project</h3>
 
-      {/* @ts-ignore */}
       <ProjectForm type="edit" session={session} project={result?.project} />
     </Modal>
   );

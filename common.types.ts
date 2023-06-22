@@ -1,3 +1,5 @@
+import { User, Session } from 'next-auth'
+
 export type FormState = {
     title: string;
     description: string;
@@ -42,13 +44,13 @@ export interface UserProfile {
     };
 }
 
-export interface SessionInterface {
-  user: {
+export interface SessionInterface extends Session {
+  user: User & {
     id: string;
     name: string;
     email: string;
     avatarUrl: string;
-  }
+  };
 }
 
 export interface ProjectForm {

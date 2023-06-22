@@ -6,9 +6,7 @@ import jsonwebtoken from 'jsonwebtoken'
 import { JWT } from "next-auth/jwt";
 
 import { createUser, getUser } from "./actions";
-import { GraphQLClient } from "graphql-request";
-import { getApiConfig } from "./utils";
-import { UserProfile } from "@/common.types";
+import { SessionInterface, UserProfile } from "@/common.types";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -43,13 +41,6 @@ export const authOptions: NextAuthOptions = {
       const email = session?.user?.email as string;
 
       try { 
-        const { apiUrl, apiKey } = getApiConfig();
-        const client = new GraphQLClient(apiUrl, {
-            headers: {
-                'x-api-key': apiKey,
-            },
-        });
-
         const data = await getUser(email) as {user?: UserProfile}
 
         const newSession = {
@@ -86,7 +77,7 @@ export const authOptions: NextAuthOptions = {
 };
 
 export async function getCurrentUser() {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions) as SessionInterface;
 
   return session;
 }

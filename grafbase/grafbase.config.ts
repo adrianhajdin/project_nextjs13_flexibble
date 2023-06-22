@@ -20,7 +20,6 @@ const Project = g.model('Project', {
   image: g.url(),
   liveSiteUrl: g.url(), 
   githubUrl: g.url(), 
-  likes: g.int().default(0),
   category: g.string().search(),
   createdBy: g.relation(() => User),
 }).auth((rules) => {

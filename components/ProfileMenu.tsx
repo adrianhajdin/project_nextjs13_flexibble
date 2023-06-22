@@ -6,20 +6,9 @@ import { signOut } from "next-auth/react";
 import { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 
-type UserProps = {
-    name: string;
-    email: string;
-    image: string;
-    id: string;
-};
-  
-type Props = {
-    session: {
-      user: UserProps;
-    };
-};
+import { SessionInterface } from "@/common.types";
 
-const ProfileMenu = ({ session }: Props) => {
+const ProfileMenu = ({ session }: { session: SessionInterface }) => {
     const [openModal, setOpenModal] = useState(false);
 
     return (

@@ -12,7 +12,7 @@ const Navbar = async () => {
   const session = await getCurrentUser()
 
   return (
-    <nav className='flexBetween py-5 px-8 border-b-[1px] border-nav-border gap-4'>
+    <nav className='flexBetween navbar'>
       <div className='flex-1 flexStart gap-10'>
         <Link href='/'>
           <Image

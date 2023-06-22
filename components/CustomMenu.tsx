@@ -16,7 +16,7 @@ const CustomMenu = ({ title, state, filters, setState }: Props) => (
         <label htmlFor={title} className="w-full text-gray-100">{title}</label>
         <Menu as="div" className="self-start relative">
             <div>
-                <Menu.Button className="flexCenter gap-4 w-full rounded-md bg-light-white-100 p-4 text-base outline-none capitalize">
+                <Menu.Button className="flexCenter custom_menu-btn">
                     {state || 'Category'}
                     <Image
                         src="/arrow-down.svg"
@@ -35,13 +35,13 @@ const CustomMenu = ({ title, state, filters, setState }: Props) => (
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
             >
-                <Menu.Items className="flexStart flex-col absolute left-0 mt-2 sm:min-w-[300px] w-fit max-h-64 origin-top-right rounded-xl bg-white border border-nav-border shadow-menu overflow-y-auto">
+                <Menu.Items className="flexStart custom_menu-items">
                     {filters.map((tag) => (
                         <Menu.Item key={tag}>
                             <button
                                 type="button"
                                 value={tag}
-                                className="text-left w-full px-5 py-2 text-sm hover:bg-light-white-100 self-start whitespace-nowrap capitalize"
+                                className="custom_menu-item"
                                 onClick={(e) => setState(e.currentTarget.value)}
                             >
                                 {tag}

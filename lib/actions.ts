@@ -54,17 +54,13 @@ export const createNewProject = async (form: ProjectForm, creatorId: string, tok
     client.setHeader("Authorization", `Bearer ${token}`);
 
     const variables = {
-      input: {
-        title: form.title,
-        description: form.description,
-        image: imageUrl.url,
-        liveSiteUrl: form.liveSiteUrl,
-        githubUrl: form.githubUrl,
-        category: form.category,
-        createdBy: {
-          link: creatorId,
-        },
-      },
+      input: { 
+        ...form, 
+        image: imageUrl.url, 
+        createdBy: { 
+          link: creatorId 
+        }
+      }
     };
 
     return makeGraphQLRequest(createProjectMutation, variables);

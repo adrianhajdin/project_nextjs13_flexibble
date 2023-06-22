@@ -34,7 +34,5 @@ export function getApiConfig() {
     const apiKey = isProduction ? process.env.NEXT_PUBLIC_GRAFBASE_API_KEY || '' : 'letmein';
     const serverUrl = isProduction ? process.env.NEXT_PUBLIC_SERVER_URL : 'http://localhost:3000';
 
-    console.log({ serverUrl })
-
     return { apiUrl, apiKey, serverUrl };
 }

@@ -11,10 +11,8 @@ const { apiUrl, apiKey, serverUrl} = getApiConfig();
 
 export const fetchToken = async () => {
     try {
-
-        console.log(`Entire URL: ${serverUrl}/api/auth/token`)
         const response = await fetch(`${serverUrl}/api/auth/token`)
-        console.log("Response for the token: ", response)
+
         return response.json()
     } catch (err) {
         return err
@@ -59,7 +57,6 @@ export const createNewProject = async (form: FormState, creatorId: string, token
         if (imageUrl.url) {
             const newForm = { ...form, image: imageUrl.url, creatorId }
 
-            console.log({ apiUrl, token, newForm, query: createProjectMutation(newForm) })
             const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
@@ -68,8 +65,6 @@ export const createNewProject = async (form: FormState, creatorId: string, token
                 },
                 body: JSON.stringify({ query: createProjectMutation(newForm)})
             })
-
-            console.log("Response: ", response)
         }
     } catch (err) {
         console.log("Error: ", err)

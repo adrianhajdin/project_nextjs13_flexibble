@@ -1,5 +1,6 @@
 import { getServerSession } from "next-auth/next";
-import { NextAuthOptions } from "next-auth";
+import { NextAuthOptions, User } from "next-auth";
+import { AdapterUser } from "next-auth/adapters";
 import GoogleProvider from "next-auth/providers/google";
 import jsonwebtoken from 'jsonwebtoken'
 import { JWT } from "next-auth/jwt";
@@ -8,6 +9,7 @@ import { createUser, getUser } from "./actions";
 import { GraphQLClient } from "graphql-request";
 import { getApiConfig } from "./utils";
 import { getUserQuery } from "@/graphql/query";
+import { UserProfile } from "@/common.types";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -42,7 +44,7 @@ export const authOptions: NextAuthOptions = {
       const email = session?.user?.email as string;
 
       try { 
-        const { apiUrl, apiKey } = await getApiConfig();
+        const { apiUrl, apiKey } = getApiConfig();
         const client = new GraphQLClient(apiUrl, {
             headers: {
                 'x-api-key': apiKey,
@@ -50,14 +52,13 @@ export const authOptions: NextAuthOptions = {
         });
 
         const mutation = getUserQuery(email);
-        const data = await client.request(mutation);
+        const data = await client.request(mutation) as {user?: UserProfile}
 
 
         const newSession = {
           ...session,
           user: {
             ...session.user,
-             // @ts-ignore
             ...data?.user,
           },
         };
@@ -68,15 +69,14 @@ export const authOptions: NextAuthOptions = {
         return session;
       }
     },
-    async signIn({ account, profile, user, credentials }) {
+    async signIn({ user }: {
+      user: AdapterUser | User
+    }) {
       try {
-        // @ts-ignore
-        const userExists = await getUser(user.email)
+        const userExists = await getUser(user?.email as string)
         
-        // @ts-ignore
         if (!userExists.user) {
-          // @ts-ignore
-          await createUser(user.name, user.email, user.image)
+          await createUser(user.name as string, user.email as string, user.image as string)
         }
 
         return true;

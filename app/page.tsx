@@ -4,7 +4,6 @@ import LoadMore from "@/components/LoadMore";
 import ProjectCard from "@/components/ProjectCard";
 import { fetchAllProjects } from "@/lib/actions";
 
-export const dynamic = 'force-dynamic'
 
 type SearchParams = {
   category?: string | null;
@@ -16,12 +15,15 @@ type Props = {
   searchParams: SearchParams
 }
 
+export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
+export const revalidate = 0;
+
 const Home = async ({ searchParams }: Props) => {
   let category = searchParams.category || null;
   let endCursor = searchParams.endcursor || null
-  let startCursor = searchParams.startcursor || null
 
-  const  data  = await fetchAllProjects(category, startCursor, endCursor)
+  const data = await fetchAllProjects(category, endCursor)
 
   // @ts-ignore
   const projectsToDisplay = data?.projectSearch?.edges || [];

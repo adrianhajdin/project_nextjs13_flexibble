@@ -29,7 +29,7 @@ const LoadMore = ({ startCursor, endCursor, hasPreviousPage, hasNextPage }: Prop
         const newPathname = `${window.location.pathname}?${newSearchParams}`;
     
         router.push(newPathname);
-    };    
+    };
 
     return (
         <div className="w-full flexCenter gap-5 mt-10">

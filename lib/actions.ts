@@ -11,7 +11,10 @@ const { apiUrl, apiKey, serverUrl} = getApiConfig();
 
 export const fetchToken = async () => {
     try {
+
+        console.log(`Entire URL: ${serverUrl}/api/auth/token`)
         const response = await fetch(`${serverUrl}/api/auth/token`)
+        console.log("Response for the token: ", response)
         return response.json()
     } catch (err) {
         return err

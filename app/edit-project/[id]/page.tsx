@@ -4,14 +4,14 @@ import Modal from "@/components/Modal";
 import ProjectForm from "@/components/ProjectForm";
 import { getCurrentUser } from "@/lib/session";
 import { getProjectDetails } from "@/lib/actions";
+import { ProjectInterface } from "@/common.types";
 
 const EditProject = async ({ params: { id } }: { params: { id: string } }) => {
   const session = await getCurrentUser();
   if (!session?.user) redirect("/")
 
-  const result = await getProjectDetails(id);
+  const result = await getProjectDetails(id) as { project?: ProjectInterface };
   
-  // @ts-ignore
   if (!result?.project) return (
     <p className="no-result-text">Failed to fetch project info</p>
   )
@@ -19,10 +19,9 @@ const EditProject = async ({ params: { id } }: { params: { id: string } }) => {
   return (
     <Modal>
       <h3 className="modal-head-text">
-        Edit a Project
+        Edit Project
       </h3>
 
-      {/* @ts-ignore */}
       <ProjectForm type="edit" session={session} project={result?.project} />
     </Modal>
   );

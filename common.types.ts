@@ -16,7 +16,6 @@ export type ProjectNode = {
     image: string
     liveSiteUrl: string
     githubUrl: string
-    likes: number
     category: string
     createdBy: UserNode
 }
@@ -37,3 +36,19 @@ export type FormState = {
     githubUrl: string;
     category: string;
 };
+
+export interface ProjectInterface {
+    title: string;
+    description: string;
+    image: string;
+    liveSiteUrl: string;
+    githubUrl: string;
+    category: string;
+    id: string;
+    createdBy: {
+      name: string;
+      email: string;
+      avatarUrl: string;
+      id: string;
+    };
+  }

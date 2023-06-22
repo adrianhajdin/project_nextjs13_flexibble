@@ -1,7 +1,6 @@
-import cloudinary from "cloudinary";
+import { v2 as cloudinary } from "cloudinary";
 import { NextResponse } from "next/server";
 
-// @ts-ignore
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
   api_key: process.env.CLOUDINARY_KEY,
@@ -15,12 +14,12 @@ export async function GET() {
 export async function POST(request: Request) {
   const { path } = await request.json();
 
-  // if (!path) {
-  //   return NextResponse.json(
-  //     { message: "Image path is required" },
-  //     { status: 400 }
-  //   );
-  // }
+  if (!path) {
+    return NextResponse.json(
+      { message: "Image path is required" },
+      { status: 400 }
+    );
+  }
 
   try {
     const options = {
@@ -30,7 +29,7 @@ export async function POST(request: Request) {
       transformation: [{ width: 1000, height: 752, crop: "scale" }],
     };
 
-    const result = await cloudinary.v2.uploader.upload(path, options);
+    const result = await cloudinary.uploader.upload(path, options);
 
     return NextResponse.json(result, { status: 200 });
   } catch (error) {

@@ -88,6 +88,7 @@ export const updateProject = async (form: ProjectForm, projectId: string, token:
       client.setHeader("Authorization", `Bearer ${token}`);
 
       const variables = {
+        id: projectId,
         input: {
           title: form.title,
           description: form.description,

@@ -73,7 +73,7 @@ export const authOptions: NextAuthOptions = {
       user: AdapterUser | User
     }) {
       try {
-        const userExists = await getUser(user?.email as string)
+        const userExists = await getUser(user?.email as string) as { user?: UserProfile }
         
         if (!userExists.user) {
           await createUser(user.name as string, user.email as string, user.image as string)

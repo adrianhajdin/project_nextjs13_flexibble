@@ -13,12 +13,13 @@ import { getApiConfig, isBase64DataURL } from "./utils";
 // } from "@/graphql";
 import { createProjectMutation, createUserMutation, deleteProjectMutation, updateProjectMutation } from "@/graphql/mutation";
 import { getProjectByIdQuery, getProjectsOfUserQuery, getUserQuery, projectsQuery } from "@/graphql/query";
+import { ProjectForm } from "@/common.types";
 
 const { apiUrl, apiKey, serverUrl } = getApiConfig();
 
 const client = new GraphQLClient(apiUrl);
 
-export const fetchToken = async (): Promise<any> => {
+export const fetchToken = async () => {
   try {
     const response = await fetch(`${serverUrl}/api/auth/token`);
     return response.json();
@@ -27,7 +28,7 @@ export const fetchToken = async (): Promise<any> => {
   }
 };
 
-export const uploadImage = async (imagePath: string): Promise<any> => {
+export const uploadImage = async (imagePath: string) => {
   try {
     const response = await fetch(`${serverUrl}/api/upload`, {
       method: "POST",
@@ -41,7 +42,7 @@ export const uploadImage = async (imagePath: string): Promise<any> => {
   }
 };
 
-const makeGraphQLRequest = async (query: string, variables = {}): Promise<any> => {
+const makeGraphQLRequest = async (query: string, variables = {}) => {
   try {
     return await client.request(query, variables);
   } catch (err) {
@@ -49,13 +50,13 @@ const makeGraphQLRequest = async (query: string, variables = {}): Promise<any> =
   }
 };
 
-export const fetchAllProjects = (category: string | null, endCursor: string | null): Promise<any> => {
+export const fetchAllProjects = (category: string | null, endCursor: string | null) => {
   client.setHeader("x-api-key", apiKey);
 
   return makeGraphQLRequest(projectsQuery, { category, endCursor });
 };
 
-export const createNewProject = async (form: any, creatorId: string, token: string): Promise<any> => {
+export const createNewProject = async (form: ProjectForm, creatorId: string, token: string) => {
   const imageUrl = await uploadImage(form.image);
 
   if (imageUrl.url) {
@@ -81,7 +82,7 @@ export const createNewProject = async (form: any, creatorId: string, token: stri
 
 
 // TODO: Update to new variables way
-export const updateProject = async (form: any, projectId: string, token: string): Promise<any> => {
+export const updateProject = async (form: ProjectForm, projectId: string, token: string) => {
   let newForm = form;
   const isBase64 = isBase64DataURL(form.image);
 
@@ -97,31 +98,31 @@ export const updateProject = async (form: any, projectId: string, token: string)
   return makeGraphQLRequest(mutation);
 };
 
-export const deleteProject = (id: string, token: string): Promise<any> => {
+export const deleteProject = (id: string, token: string) => {
   client.setHeader("Authorization", `Bearer ${token}`);
   const mutation = deleteProjectMutation(id);
   return makeGraphQLRequest(mutation);
 };
 
-export const getProjectDetails = (id: string): Promise<any> => {
+export const getProjectDetails = (id: string) => {
   client.setHeader("x-api-key", apiKey);
   const mutation = getProjectByIdQuery(id);
   return makeGraphQLRequest(mutation);
 };
 
-export const createUser = (name: string, email: string, avatarUrl: string): Promise<any> => {
+export const createUser = (name: string, email: string, avatarUrl: string) => {
   client.setHeader("x-api-key", apiKey);
   const mutation = createUserMutation(name, email, avatarUrl);
   return makeGraphQLRequest(mutation);
 };
 
-export const getUserProjects = (id: string, last?: number, cursor?: string): Promise<any> => {
+export const getUserProjects = (id: string, last?: number, cursor?: string) => {
   client.setHeader("x-api-key", apiKey);
   const query = getProjectsOfUserQuery(id, last, cursor);
   return makeGraphQLRequest(query);
 };
 
-export const getUser = (email: string): Promise<any> => {
+export const getUser = (email: string) => {
   client.setHeader("x-api-key", apiKey);
   const mutation = getUserQuery(email);
   return makeGraphQLRequest(mutation);

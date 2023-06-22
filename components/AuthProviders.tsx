@@ -5,8 +5,20 @@ import React, { useEffect, useState } from 'react'
 
 import CustomButton from './Button';
 
+type Provider = {
+    id: string;
+    name: string;
+    type: string;
+    signinUrl: string;
+    callbackUrl: string;
+    signinUrlParams?: Record<string, string> | undefined;
+  };
+  
+  type Providers = Record<string, Provider>;
+
+
 const AuthProviders = () => {
-    const [providers, setProviders] = useState<any>(null);
+    const [providers, setProviders] = useState<Providers | null>(null);
 
     useEffect(() => {
         const fetchProviders = async () => {
@@ -21,7 +33,7 @@ const AuthProviders = () => {
     if (providers) {
         return (
             <div>
-                {Object.values(providers).map((provider: any, index) => (
+                {Object.values(providers).map((provider: Provider, index) => (
                     <CustomButton 
                         key={index} 
                         title='Sign In' 

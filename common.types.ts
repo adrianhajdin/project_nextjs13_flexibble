@@ -51,7 +51,7 @@ export interface ProjectInterface {
       avatarUrl: string;
       id: string;
     };
-  }
+}
 
 export interface UserProfile {
     id: string;
@@ -70,4 +70,22 @@ export interface UserProfile {
         endCursor: string;
       };
     };
+}
+
+export interface SessionInterface {
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    avatarUrl: string;
+  }
+}
+
+export interface ProjectForm {
+  title: string;
+  description: string;
+  image: string;
+  liveSiteUrl: string;
+  githubUrl: string;
+  category: string;
 }

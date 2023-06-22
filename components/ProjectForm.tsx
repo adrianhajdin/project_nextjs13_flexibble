@@ -5,7 +5,7 @@ import React, { ChangeEvent, FormEvent, useState } from 'react'
 import { useRouter } from 'next/navigation';
 
 import FormField from './FormField';
-import CustomButton from './Button';
+import Button from './Button';
 import CustomMenu from './CustomMenu';
 import { categoryFilters } from '@/constant';
 import { updateProject, createNewProject, fetchToken } from '@/lib/actions';
@@ -31,10 +31,7 @@ const ProjectForm = ({ type, session, project }: Props) => {
     })
 
     const handleStateChange = (fieldName: keyof FormState, value: string) => {
-        setForm((prevForm) => ({
-            ...prevForm,
-            [fieldName]: value,
-        }));
+        setForm((prevForm) => ({ ...prevForm, [fieldName]: value }));
     };
 
     const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
@@ -45,21 +42,25 @@ const ProjectForm = ({ type, session, project }: Props) => {
         if (!file) return;
 
         if (!file.type.includes('image')) {
-            alert('Please upload an image file!');
+            alert('Please upload an image!');
+
             return;
         }
 
         const reader = new FileReader();
+
         reader.readAsDataURL(file);
 
         reader.onload = () => {
             const result = reader.result as string;
+
             handleStateChange("image", result)
         };
     };
 
     const handleFormSubmit = async (e: FormEvent) => {
-        e.preventDefault()
+        e.preventDefault();
+
         setSubmitting(true)
 
         const { token } = await fetchToken()
@@ -67,17 +68,18 @@ const ProjectForm = ({ type, session, project }: Props) => {
         try {
             if (type === "create") {
                 await createNewProject(form, session?.user?.id, token)
-                router.push("/")
+
+                router.replace("/")
             }
             
             if (type === "edit") {
                 await updateProject(form, project?.id as string, token)
-                router.push("/")
+
+                router.replace("/")
             }
 
         } catch (error) {
-            alert(`Failed to ${type === "create" ? "create" : "edit"} a project. Try again!`)
-            console.error("Something bad happened", error)
+            alert(`Failed to ${type === "create" ? "create" : "edit"} a project. Try again!`);
         } finally {
             setSubmitting(false)
         }
@@ -88,10 +90,7 @@ const ProjectForm = ({ type, session, project }: Props) => {
             onSubmit={handleFormSubmit}
             className="flexStart form">
             <div className="flexStart form_image-container">
-                <label
-                    htmlFor="poster"
-                    className="flexCenter form_image-label"
-                >
+                <label htmlFor="poster" className="flexCenter form_image-label">
                     {!form.image && 'Choose a poster for your project'}
                 </label>
                 <input
@@ -150,7 +149,7 @@ const ProjectForm = ({ type, session, project }: Props) => {
             />
 
             <div className="flexStart w-full">
-                <CustomButton
+                <Button
                     title={submitting ? `${type === "create" ? "Creating" : "Editing"}` : `${type === "create" ? "Create" : "Edit"}`}
                     type="submit"
                     leftIcon={submitting ? "" : "/plus.svg"}

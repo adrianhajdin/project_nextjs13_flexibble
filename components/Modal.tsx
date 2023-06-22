@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useEffect, ReactNode } from "react";
+import { useCallback, useRef, ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
@@ -19,32 +19,13 @@ export default function Modal({ children }: { children: ReactNode }) {
         }
     }, [onDismiss, overlay]);
 
-    const onKeyDown = useCallback((e: KeyboardEvent) => {
-        if (e.key === "Escape") onDismiss();
-    }, [onDismiss]);
-
-    useEffect(() => {
-        document.addEventListener("keydown", onKeyDown);
-
-        return () => document.removeEventListener("keydown", onKeyDown);
-    }, [onKeyDown]);
-
     return (
-        <div
-            ref={overlay}
-            className="modal"
-            onClick={(e) => handleClick(e)}
-        >
-            <button
-                type="button"
-                onClick={() => onDismiss()}
-                className="absolute top-4 right-8"
-            >
+        <div ref={overlay} className="modal" onClick={(e) => handleClick(e)}>
+            <button type="button" onClick={onDismiss} className="absolute top-4 right-8">
                 <Image src="/close.svg" width={17} height={17} alt="close" />
             </button>
 
-            <div ref={wrapper} className="modal_wrapper"
-            >
+            <div ref={wrapper} className="modal_wrapper">
                 {children}
             </div>
         </div>

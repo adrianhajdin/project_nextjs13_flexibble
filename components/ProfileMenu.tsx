@@ -82,7 +82,6 @@ const ProfileMenu = ({ session }: Props) => {
                                     Sign out
                                 </button>
                             </Menu.Item>
-
                         </div>
                     </Menu.Items>
                 </Transition>

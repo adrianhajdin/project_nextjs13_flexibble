@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-import CustomButton from "./Button";
+import Button from "./Button";
 
 type Props = {
     startCursor: string
@@ -34,10 +34,10 @@ const LoadMore = ({ startCursor, endCursor, hasPreviousPage, hasNextPage }: Prop
     return (
         <div className="w-full flexCenter gap-5 mt-10">
             {hasPreviousPage && (
-                <CustomButton title="Previous" handleClick={() => handleNavigation('prev')} />
+                <Button title="First Page" handleClick={() => handleNavigation('prev')} />
             )}
             {hasNextPage && (
-                <CustomButton title="Next" handleClick={() => handleNavigation('next')} />
+                <Button title="Next" handleClick={() => handleNavigation('next')} />
             )}
         </div>
     );

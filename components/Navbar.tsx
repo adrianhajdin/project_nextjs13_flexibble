@@ -5,7 +5,7 @@ import { NavLinks } from "@/constant";
 import { getCurrentUser } from "@/lib/session";
 
 import AuthProviders from "./AuthProviders";
-import CustomButton from "./Button";
+import Button from "./Button";
 import ProfileMenu from "./ProfileMenu";
 
 const Navbar = async () => {
@@ -37,7 +37,7 @@ const Navbar = async () => {
             <ProfileMenu session={session} />
 
             <Link href="/create-project">
-              <CustomButton title='Share work' />
+              <Button title='Share work' />
             </Link>
           </>
         ) : (

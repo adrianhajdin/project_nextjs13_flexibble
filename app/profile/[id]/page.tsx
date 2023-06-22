@@ -1,5 +1,5 @@
 import { getUserProjects } from '@/lib/actions'
-import ProfilePage from '@/components/profile/ProfilePage'
+import ProfilePage from '@/components/ProfilePage'
 
 type Props = {
     params: {
@@ -19,9 +19,7 @@ const UserProfile = async ({ params, searchParams }: Props) => {
         <p className="no-result-text">Failed to fetch user info</p>
     )
 
-    return (
-        <ProfilePage user={result?.user}  />
-    )
+    return <ProfilePage user={result?.user}  />
 }
 
 export default UserProfile

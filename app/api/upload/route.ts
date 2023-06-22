@@ -7,18 +7,11 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_SECRET,
 });
 
-export async function GET() {
-  return NextResponse.json({ message: "Upload Works" });
-}
-
 export async function POST(request: Request) {
   const { path } = await request.json();
 
   if (!path) {
-    return NextResponse.json(
-      { message: "Image path is required" },
-      { status: 400 }
-    );
+    return NextResponse.json({ message: "Image path is required" }, { status: 400 });
   }
 
   try {
@@ -33,9 +26,6 @@ export async function POST(request: Request) {
 
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
-    return NextResponse.json(
-      { message: "Failed to upload image on cloudinary" },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: "Failed to upload image on Cloudinary" }, { status: 500 });
   }
 }

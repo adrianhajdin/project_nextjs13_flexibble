@@ -1,5 +1,5 @@
 import { ProjectInterface } from "@/common.types";
-import HomeFilter from "@/components/HomeFilter";
+import Categories from "@/components/Categories";
 import LoadMore from "@/components/LoadMore";
 import ProjectCard from "@/components/ProjectCard";
 import { fetchAllProjects } from "@/lib/actions";
@@ -7,7 +7,6 @@ import { fetchAllProjects } from "@/lib/actions";
 type SearchParams = {
   category?: string | null;
   endcursor?: string | null;
-  startcursor?: string | null
 }
 
 type Props = {
@@ -30,26 +29,25 @@ export const dynamic = 'force-dynamic';
 export const dynamicParams = true;
 export const revalidate = 0;
 
-const Home = async ({ searchParams }: Props) => {
-  let category = searchParams.category || null;
-  let endCursor = searchParams.endcursor || null
-
-  const data = await fetchAllProjects(category, endCursor) as ProjectSearch
+const Home = async ({ searchParams: { category, endcursor } }: Props) => {
+  const data = await fetchAllProjects(category, endcursor) as ProjectSearch
 
   const projectsToDisplay = data?.projectSearch?.edges || [];
 
   if (projectsToDisplay.length === 0) {
     return (
       <section className="flexStart flex-col paddings">
-        <HomeFilter />
-        <p className="no-result-text text-center">Sorry no projects found</p>
+        <Categories />
+
+        <p className="no-result-text text-center">No projects found, go create some first.</p>
       </section>
     )
   }
 
   return (
     <section className="flexStart flex-col paddings mb-16">
-      <HomeFilter />
+      <Categories />
+
       <section className="projects-grid">
         {projectsToDisplay.map(({ node }: { node: ProjectInterface }) => (
           <ProjectCard
@@ -63,12 +61,13 @@ const Home = async ({ searchParams }: Props) => {
           />
         ))}
       </section>
-        <LoadMore 
-          startCursor={data?.projectSearch?.pageInfo?.startCursor} 
-          endCursor={data?.projectSearch?.pageInfo?.endCursor} 
-          hasPreviousPage={data?.projectSearch?.pageInfo?.hasPreviousPage} 
-          hasNextPage={data?.projectSearch?.pageInfo.hasNextPage}
-        />
+
+      <LoadMore 
+        startCursor={data?.projectSearch?.pageInfo?.startCursor} 
+        endCursor={data?.projectSearch?.pageInfo?.endCursor} 
+        hasPreviousPage={data?.projectSearch?.pageInfo?.hasPreviousPage} 
+        hasNextPage={data?.projectSearch?.pageInfo.hasNextPage}
+      />
     </section>
   )
 };

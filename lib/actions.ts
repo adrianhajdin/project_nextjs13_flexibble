@@ -74,37 +74,29 @@ export const createNewProject = async (form: ProjectForm, creatorId: string, tok
 export const updateProject = async (form: ProjectForm, projectId: string, token: string) => {
   function isBase64DataURL(value: string) {
     const base64Regex = /^data:image\/[a-z]+;base64,/;
-    
     return base64Regex.test(value);
   }
 
-  const isBase64 = isBase64DataURL(form.image);
+  let updatedForm = { ...form };
 
-  if (isBase64) {
+  const isUploadingNewImage = isBase64DataURL(form.image);
+
+  if (isUploadingNewImage) {
     const imageUrl = await uploadImage(form.image);
 
     if (imageUrl.url) {
-
-      client.setHeader("Authorization", `Bearer ${token}`);
-
-      const variables = {
-        id: projectId,
-        input: {
-          title: form.title,
-          description: form.description,
-          image: imageUrl.url,
-          liveSiteUrl: form.liveSiteUrl,
-          githubUrl: form.githubUrl,
-          category: form.category,
-          createdBy: {
-            link: projectId,
-          },
-        },
-      };
-    
-      return makeGraphQLRequest(updateProjectMutation, variables);
+      updatedForm = { ...updatedForm, image: imageUrl.url };
     }
   }
+
+  client.setHeader("Authorization", `Bearer ${token}`);
+
+  const variables = {
+    id: projectId,
+    input: updatedForm,
+  };
+
+  return makeGraphQLRequest(updateProjectMutation, variables);
 };
 
 export const deleteProject = (id: string, token: string) => {

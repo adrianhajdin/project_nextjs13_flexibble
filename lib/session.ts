@@ -8,7 +8,6 @@ import { JWT } from "next-auth/jwt";
 import { createUser, getUser } from "./actions";
 import { GraphQLClient } from "graphql-request";
 import { getApiConfig } from "./utils";
-import { getUserQuery } from "@/graphql/query";
 import { UserProfile } from "@/common.types";
 
 export const authOptions: NextAuthOptions = {
@@ -51,9 +50,7 @@ export const authOptions: NextAuthOptions = {
             },
         });
 
-        const mutation = getUserQuery(email);
-        const data = await client.request(mutation) as {user?: UserProfile}
-
+        const data = await getUser(email) as {user?: UserProfile}
 
         const newSession = {
           ...session,

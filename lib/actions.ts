@@ -1,18 +1,15 @@
 import { GraphQLClient } from "graphql-request";
 import { getApiConfig, isBase64DataURL } from "./utils";
-//todo do this what chatgpt suggested. import from one file.
-// import {
-//   createProjectMutation,
-//   createUserMutation,
-//   deleteProjectMutation,
-//   updateProjectMutation,
-//   getProjectByIdQuery,
-//   getProjectsOfUserQuery,
-//   getUserQuery,
-//   projectsQuery,
-// } from "@/graphql";
-import { createProjectMutation, createUserMutation, deleteProjectMutation, updateProjectMutation } from "@/graphql/mutation";
-import { getProjectByIdQuery, getProjectsOfUserQuery, getUserQuery, projectsQuery } from "@/graphql/query";
+import {
+  createProjectMutation,
+  createUserMutation,
+  deleteProjectMutation,
+  updateProjectMutation,
+  getProjectByIdQuery,
+  getProjectsOfUserQuery,
+  getUserQuery,
+  projectsQuery,
+} from "@/graphql";
 import { ProjectForm } from "@/common.types";
 
 const { apiUrl, apiKey, serverUrl } = getApiConfig();
@@ -80,8 +77,6 @@ export const createNewProject = async (form: ProjectForm, creatorId: string, tok
   }
 };
 
-
-// TODO: Update to new variables way
 export const updateProject = async (form: ProjectForm, projectId: string, token: string) => {
   let newForm = form;
   const isBase64 = isBase64DataURL(form.image);
@@ -89,41 +84,58 @@ export const updateProject = async (form: ProjectForm, projectId: string, token:
   if (isBase64) {
     const imageUrl = await uploadImage(form.image);
     if (imageUrl.url) {
-      newForm = { ...form, image: imageUrl.url };
+
+      client.setHeader("Authorization", `Bearer ${token}`);
+
+      const variables = {
+        input: {
+          title: form.title,
+          description: form.description,
+          image: imageUrl.url,
+          liveSiteUrl: form.liveSiteUrl,
+          githubUrl: form.githubUrl,
+          category: form.category,
+          createdBy: {
+            link: projectId,
+          },
+        },
+      };
+    
+      return makeGraphQLRequest(updateProjectMutation, variables);
     }
   }
-
-  client.setHeader("Authorization", `Bearer ${token}`);
-  const mutation = updateProjectMutation(newForm, projectId);
-  return makeGraphQLRequest(mutation);
 };
 
 export const deleteProject = (id: string, token: string) => {
   client.setHeader("Authorization", `Bearer ${token}`);
-  const mutation = deleteProjectMutation(id);
-  return makeGraphQLRequest(mutation);
+  return makeGraphQLRequest(deleteProjectMutation, { id });
 };
 
 export const getProjectDetails = (id: string) => {
   client.setHeader("x-api-key", apiKey);
-  const mutation = getProjectByIdQuery(id);
-  return makeGraphQLRequest(mutation);
+  return makeGraphQLRequest(getProjectByIdQuery, { id });
 };
 
 export const createUser = (name: string, email: string, avatarUrl: string) => {
   client.setHeader("x-api-key", apiKey);
-  const mutation = createUserMutation(name, email, avatarUrl);
-  return makeGraphQLRequest(mutation);
+
+  const variables = {
+    input: {
+      name: name,
+      email: email,
+      avatarUrl: avatarUrl
+    },
+  };
+  
+  return makeGraphQLRequest(createUserMutation, variables);
 };
 
 export const getUserProjects = (id: string, last?: number, cursor?: string) => {
   client.setHeader("x-api-key", apiKey);
-  const query = getProjectsOfUserQuery(id, last, cursor);
-  return makeGraphQLRequest(query);
+  return makeGraphQLRequest(getProjectsOfUserQuery, { id, last, cursor });
 };
 
 export const getUser = (email: string) => {
   client.setHeader("x-api-key", apiKey);
-  const mutation = getUserQuery(email);
-  return makeGraphQLRequest(mutation);
+  return makeGraphQLRequest(getUserQuery, { email });
 };

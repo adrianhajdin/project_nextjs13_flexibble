@@ -15,19 +15,37 @@ type UserFormProps = {
 	linkedinUrl: string
 }
 
-export const createProjectMutation = (form: ProjectFormProps) => {
-	return `mutation {
-		projectCreate(input: {
-			title: "${form.title}"
-			description: "${form.description}"
-			image: "${form.image}"
-			liveSiteUrl: "${form.liveSiteUrl}"
-			githubUrl: "${form.githubUrl}"
-			category: "${form.category}"
-			createdBy: {
-				link: "${form.creatorId}"
-			}
-		}) {
+// export const createProjectMutation = (form: ProjectFormProps) => {
+// 	return `mutation {
+// 		projectCreate(input: {
+// 			title: "${form.title}"
+// 			description: "${form.description}"
+// 			image: "${form.image}"
+// 			liveSiteUrl: "${form.liveSiteUrl}"
+// 			githubUrl: "${form.githubUrl}"
+// 			category: "${form.category}"
+// 			createdBy: {
+// 				link: "${form.creatorId}"
+// 			}
+// 		}) {
+// 			project {
+// 				id
+// 				title
+// 				description
+// 				createdBy {
+// 					email
+// 					name
+// 				}
+// 			}
+// 		}
+// 	}`
+// }
+
+// TODO: ALL OF THESE NEED TO BE CONVERTED TO USE VARIABLES.
+
+export const createProjectMutation = `
+	mutation CreateProject($input: ProjectCreateInput!) {
+		projectCreate(input: $input) {
 			project {
 				id
 				title
@@ -38,9 +56,9 @@ export const createProjectMutation = (form: ProjectFormProps) => {
 				}
 			}
 		}
-	}`
-}
+	}`;
 
+//varaible called id and then pass it into the by
 export const updateProjectMutation = (form: ProjectFormProps, projectId: string) => {
 	return `mutation {
 		projectUpdate(by: {id: "${projectId}"}, input:  { title: "${form.title}", description: "${form.description}", image: "${form.image}", liveSiteUrl: "${form.liveSiteUrl}", githubUrl: "${form.githubUrl}", category: "${form.category}" }) {

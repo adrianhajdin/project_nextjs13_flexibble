@@ -3,7 +3,6 @@ import Image from 'next/image'
 
 import Link from 'next/link'
 import Button from "./Button";
-import LoadMore from './LoadMore';
 import ProjectCard from './ProjectCard';
 
 type Props = {
@@ -68,13 +67,6 @@ const ProfilePage = ({ user }: Props) => (
                     )
                 )}
             </div>
-
-            <LoadMore 
-                startCursor={user?.projects?.pageInfo?.startCursor} 
-                endCursor={user?.projects?.pageInfo?.endCursor}
-                hasPreviousPage={user?.projects?.pageInfo?.hasPreviousPage}
-                hasNextPage={user?.projects?.pageInfo?.hasNextPage}
-            />
        </section>
    </section>
 )

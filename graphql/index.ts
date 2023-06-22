@@ -119,7 +119,7 @@ export const getUserQuery = `
 `;
       
 export const getProjectsOfUserQuery = `
-  query getUserProjects($id: ID!, $last: Int = 5, $cursor: String) {
+  query getUserProjects($id: ID!, $last: Int = 4) {
     user(by: { id: $id }) {
       id
       name
@@ -128,19 +128,13 @@ export const getProjectsOfUserQuery = `
       avatarUrl
       githubUrl
       linkedinUrl
-      projects(last: $last, before: $cursor) {
+      projects(last: $last) {
         edges {
           node {
             id
             title
             image
           }
-        },
-        pageInfo {
-          hasNextPage
-          hasPreviousPage
-          startCursor
-          endCursor
         }
       }
     }

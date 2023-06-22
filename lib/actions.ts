@@ -123,9 +123,9 @@ export const createUser = (name: string, email: string, avatarUrl: string) => {
   return makeGraphQLRequest(createUserMutation, variables);
 };
 
-export const getUserProjects = (id: string, last?: number, cursor?: string) => {
+export const getUserProjects = (id: string, last?: number) => {
   client.setHeader("x-api-key", apiKey);
-  return makeGraphQLRequest(getProjectsOfUserQuery, { id, last, cursor });
+  return makeGraphQLRequest(getProjectsOfUserQuery, { id, last });
 };
 
 export const getUser = (email: string) => {

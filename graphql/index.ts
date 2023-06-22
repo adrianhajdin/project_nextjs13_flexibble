@@ -93,7 +93,6 @@ export const getProjectByIdQuery = `
       image
       liveSiteUrl
       githubUrl
-      likes
       category
       createdBy {
         id

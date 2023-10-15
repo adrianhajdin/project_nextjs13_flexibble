@@ -1,6 +1,9 @@
 # Build and Deploy a Full Stack Next.js 13 Application | React, Next JS 13, TypeScript, Tailwind CSS
 ![Flexibble](https://i.ibb.co/CvSk76H/Thumbnail.png)
 
+### [🌟 Become a top 1% Next.js 13 developer in only one course](https://jsmastery.pro/next13)
+### [🚀 Land your dream programming job in 6 months](https://jsmastery.pro/masterclass)
+
 ## Introduction
 Next.js has the potential to revolutionize the industry and forever change the way we develop web applications. You’re still early in catching the trend and building your own Next.js 13 applications with TypeScript that leverage features such as server-side rendering and the app router.
  
